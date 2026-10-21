@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Events &amp; Hackathons | CampusSync</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="page-events">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="brand-badge">CS</div>
+            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+        </div>
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
+        <nav class="navbar" id="navbar">
+            <a href="Home.html">Home</a>
+            <a href="About.html">About</a>
+            <a href="Courses.html">Courses</a>
+            <a href="Timetable.html">Timetable</a>
+            <a href="StudyMaterial.html">Study Material</a>
+            <a href="events.html" class="active">Events</a>
+            <a href="Admission.html">Admissions</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="Help.html">Helpdesk</a>
+            <a href="Login.html" class="nav-auth-btn">Sign In</a>
+            <button id="themeToggle" class="theme-btn" title="Toggle Theme">&#9790;</button>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="section-head">
+            <span class="hero-pill">&#127881; Practical 6 &bull; External JSON &amp; Fetch API</span>
+            <h2>University Events, Hackathons &amp; Workshops</h2>
+            <p>Live data dynamically fetched from <code>events.json</code> with real-time search, category filtering, sorting, and pagination.</p>
+        </div>
+
+        <!-- Filter & Search Toolbar (Practical 6) -->
+        <section class="card filter-card" style="margin-bottom: 30px;">
+            <div class="filter-flex">
+                <input type="text" id="eventSearch" placeholder="Search events by title, organizer, or venue..." class="filter-input" aria-label="Search events">
+
+                <select id="eventCategoryFilter" class="filter-select" aria-label="Filter by category">
+                    <option value="">All Categories</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Seminar">Seminar</option>
+                </select>
+
+                <select id="eventSort" class="filter-select" aria-label="Sort events">
+                    <option value="date-asc">Date (Earliest First)</option>
+                    <option value="date-desc">Date (Latest First)</option>
+                    <option value="title-asc">Title (A &ndash; Z)</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Dynamic Events Container (Populated by Fetch API in script.js) -->
+        <div class="features-grid" id="eventsJsonList" aria-live="polite">
+            <!-- Loading Spinner Placeholder -->
+            <div class="card text-center" style="grid-column: 1 / -1; padding: 40px;">
+                <p>Loading events from <code>events.json</code> using JavaScript Fetch API...</p>
+            </div>
+        </div>
+
+        <!-- Pagination Controls (Practical 6) -->
+        <div id="eventPagination" style="display:flex; justify-content:center; gap:8px; margin-top:36px;"></div>
+
+        <!-- Practical 13 Prompt -->
+        <div class="card" style="margin-top: 50px; text-align:center; background: var(--bg-surface-alt);">
+            <h4>Looking for Asynchronous Event CRUD without Page Reload?</h4>
+            <p style="color:var(--text-secondary); margin: 6px 0 16px 0; font-size:0.92rem;">
+                Explore our full RESTful JSON API and asynchronous CRUD operations built for <strong>Practical 13</strong>.
+            </p>
+            <a href="ajax_events.html" class="btn btn-primary btn-sm">&#9881; Open Practical 13 AJAX Module</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>CampusSync Portal</h4>
+                <p style="font-size:0.9rem; line-height:1.7;">Faculty of Technology and Engineering &bull; Web Development Frameworks (ITUE203)</p>
+            </div>
+            <div class="footer-col">
+                <h4>Academics</h4>
+                <ul>
+                    <li><a href="Courses.html">Programs</a></li>
+                    <li><a href="Timetable.html">Timetable</a></li>
+                    <li><a href="StudyMaterial.html">Study Material</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="FAQ.html">FAQ</a></li>
+                    <li><a href="Help.html">Helpdesk</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Portals</h4>
+                <ul>
+                    <li><a href="Login.html">Student Login</a></li>
+                    <li><a href="Signup.html">Sign Up</a></li>
+                    <li><a href="admin_dashboard.php">Admin Panel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026-2027 CampusSync Portal &bull; CHARUSAT FTE &bull; Practical 6 Implementation</p>
+        </div>
+    </footer>
+</body>
+</html>

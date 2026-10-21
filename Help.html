@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Helpdesk &amp; Support | CampusSync</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="page-help">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="brand-badge">CS</div>
+            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+        </div>
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
+        <nav class="navbar" id="navbar">
+            <a href="Home.html">Home</a>
+            <a href="About.html">About</a>
+            <a href="Courses.html">Courses</a>
+            <a href="Timetable.html">Timetable</a>
+            <a href="StudyMaterial.html">Study Material</a>
+            <a href="events.html">Events</a>
+            <a href="Admission.html">Admissions</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="Help.html" class="active">Helpdesk</a>
+            <a href="Login.html" class="nav-auth-btn">Sign In</a>
+            <button id="themeToggle" class="theme-btn" title="Toggle Theme">&#9790;</button>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="section-head">
+            <span class="hero-pill">&#128222; Practical 7 &bull; Form Processing</span>
+            <h2>Student Helpdesk &amp; Grievance Support</h2>
+            <p>Submit inquiries or academic concerns. Submissions are processed via PHP and stored in CSV and JSON formats.</p>
+        </div>
+
+        <!-- Query Feedback Banner -->
+        <div id="urlAlertContainer"></div>
+        <script>
+            // Parse query string for feedback message from process.php
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const msg = urlParams.get('msg');
+            if (msg) {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-${status === 'success' ? 'success' : 'error'}`;
+                alertDiv.innerHTML = decodeURIComponent(msg);
+                document.getElementById('urlAlertContainer').appendChild(alertDiv);
+            }
+        </script>
+
+        <div class="two-col-grid">
+            <!-- Contact Details Card -->
+            <div class="card">
+                <h3>Campus Assistance Contacts</h3>
+                <p style="color:var(--text-secondary); margin: 12px 0 20px 0;">
+                    For urgent administrative or technical assistance, visit the Dean's Office or contact the designated coordinators below:
+                </p>
+
+                <div style="display:flex; flex-direction:column; gap:16px; font-size:0.95rem;">
+                    <div>
+                        <strong>&#127979; Campus Location:</strong>
+                        <p style="color:var(--text-secondary); margin-top:4px;">Faculty of Technology and Engineering (FTE), CHARUSAT Campus, Changa - 388421, Gujarat, India.</p>
+                    </div>
+
+                    <div>
+                        <strong>&#128222; Helpline Numbers:</strong>
+                        <p style="color:var(--text-secondary); margin-top:4px;">+91 2697 265011 / +91 2697 265021</p>
+                    </div>
+
+                    <div>
+                        <strong>&#9993; Official Support Email:</strong>
+                        <p style="color:var(--text-secondary); margin-top:4px;">support.fte@charusat.ac.in</p>
+                    </div>
+
+                    <div>
+                        <strong>&#9200; Office Hours:</strong>
+                        <p style="color:var(--text-secondary); margin-top:4px;">Monday &ndash; Saturday: 09:00 AM &ndash; 04:30 PM</p>
+                    </div>
+                </div>
+
+                <div style="background:var(--bg-surface-alt); padding:16px; border-radius:var(--radius-sm); margin-top:24px;">
+                    <h4 style="font-size:0.95rem; margin-bottom:6px;">&#128196; Practical 7 Notice</h4>
+                    <p style="font-size:0.85rem; color:var(--text-secondary);">
+                        Forms submitted on this page are handled by <code>process.php</code> with server-side validation and sanitization, permanently appending records into <code>data/inquiries.csv</code> and <code>data/inquiries.json</code>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Inquiries Form Card (Practical 7) -->
+            <div class="card">
+                <h3>Submit an Inquiry or Grievance</h3>
+                <form action="process.php" method="POST" style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="name">Your Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="e.g. Aryan Sharma">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="e.g. aryan@campus.edu">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Inquiry Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="Academic">Academic / Curriculum</option>
+                            <option value="Examination">Examinations &amp; Evaluation</option>
+                            <option value="Timetable">Timetable / Lecture Scheduling</option>
+                            <option value="Technical">Portal Technical Issue</option>
+                            <option value="Admission">Admission Inquiry</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject / Brief Summary *</label>
+                        <input type="text" id="subject" name="subject" required placeholder="e.g. Request for lab batch reschedule">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Detailed Message *</label>
+                        <textarea id="message" name="message" rows="4" required placeholder="Explain your inquiry in detail..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">&#128640; Submit Request (Process via PHP)</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>CampusSync Portal</h4>
+                <p style="font-size:0.9rem; line-height:1.7;">Faculty of Technology and Engineering &bull; Web Development Frameworks (ITUE203)</p>
+            </div>
+            <div class="footer-col">
+                <h4>Academics</h4>
+                <ul>
+                    <li><a href="Courses.html">Programs</a></li>
+                    <li><a href="Timetable.html">Timetable</a></li>
+                    <li><a href="StudyMaterial.html">Study Material</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="FAQ.html">FAQ</a></li>
+                    <li><a href="Help.html">Helpdesk</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Portals</h4>
+                <ul>
+                    <li><a href="Login.html">Student Login</a></li>
+                    <li><a href="Signup.html">Sign Up</a></li>
+                    <li><a href="admin_dashboard.php">Admin Panel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026-2027 CampusSync Portal &bull; CHARUSAT FTE</p>
+        </div>
+    </footer>
+</body>
+</html>

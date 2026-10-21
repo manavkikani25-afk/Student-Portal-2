@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "category": "Academic",
+    "question": "What is the minimum attendance requirement to appear in semester examinations?",
+    "answer": "As per university academic regulations, students must maintain a minimum of 80% attendance in each registered theory lecture and 85% in laboratory practical sessions to be eligible for end-semester exams."
+  },
+  {
+    "id": 2,
+    "category": "Academic",
+    "question": "How can I access subject notes, previous exam papers, and lab manuals?",
+    "answer": "Navigate to the 'Study Material' page from the main menu. You can filter resources by department, semester, and course code, and download verified PDFs directly without any paywall."
+  },
+  {
+    "id": 3,
+    "category": "Portal",
+    "question": "How do I reset my portal password if I forget it?",
+    "answer": "On the Login page, click on 'Forgot Password' or contact the department IT administrator with your registered student enrollment number to generate a secure password reset link."
+  },
+  {
+    "id": 4,
+    "category": "Portal",
+    "question": "How does the Remember-Me feature keep my session secure?",
+    "answer": "CampusSync implements the split-token selector/validator cryptographic standard. The browser stores a randomized token hash, ensuring your credentials cannot be recovered even if the cookie is intercepted."
+  },
+  {
+    "id": 5,
+    "category": "Events",
+    "question": "Are event participation certificates provided through the portal?",
+    "answer": "Yes! Once an event is marked 'Completed' by the faculty coordinator, registered attendees can download their verifiable digital e-certificate directly from their Student Dashboard."
+  },
+  {
+    "id": 6,
+    "category": "Admissions",
+    "question": "What documents are required during campus verification for admission?",
+    "answer": "You need your Class 10th and 12th original marksheets, school leaving certificate, GUJCET/JEE scorecard, category/caste certificate (if applicable), and 4 passport-size photographs."
+  }
+]

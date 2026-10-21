@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration | CampusSync</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="page-signup">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="brand-badge">CS</div>
+            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+        </div>
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
+        <nav class="navbar" id="navbar">
+            <a href="Home.html">Home</a>
+            <a href="About.html">About</a>
+            <a href="Courses.html">Courses</a>
+            <a href="Timetable.html">Timetable</a>
+            <a href="StudyMaterial.html">Study Material</a>
+            <a href="events.html">Events</a>
+            <a href="Admission.html">Admissions</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="Help.html">Helpdesk</a>
+            <a href="Login.html" class="nav-auth-btn">Sign In</a>
+            <button id="themeToggle" class="theme-btn" title="Toggle Theme">&#9790;</button>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="form-container">
+            <div class="form-head">
+                <span class="badge badge-category" style="margin-bottom: 8px;">Practical 5 &amp; 9</span>
+                <h2>Student Registration</h2>
+                <p>Create your portal account with verified academic credentials.</p>
+            </div>
+
+            <!-- Error Banner from Server -->
+            <div id="serverErrorContainer"></div>
+            <script>
+                const params = new URLSearchParams(window.location.search);
+                const err = params.get('error');
+                if (err) {
+                    const box = document.createElement('div');
+                    box.className = 'alert alert-error';
+                    box.innerHTML = decodeURIComponent(err);
+                    document.getElementById('serverErrorContainer').appendChild(box);
+                }
+            </script>
+
+            <form action="signup.php" method="POST" id="registrationForm" novalidate>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="full_name">Full Name *</label>
+                    <input type="text" id="full_name" name="full_name" placeholder="e.g. Aryan Sharma" required autocomplete="name">
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Academic Email -->
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="e.g. aryan.sharma@campus.edu" required autocomplete="email">
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Mobile Number -->
+                <div class="form-group">
+                    <label for="mobile">Mobile Number (10 Digits) *</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="e.g. 9825012345" required maxlength="10" autocomplete="tel">
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Course Selection -->
+                <div class="form-group">
+                    <label for="course">Academic Program / Department *</label>
+                    <select id="course" name="course" required>
+                        <option value="">Select Enrolled Program</option>
+                        <option value="B.Tech CSE">B.Tech - Computer Science &amp; Engineering</option>
+                        <option value="B.Tech IT">B.Tech - Information Technology</option>
+                        <option value="B.Tech CE">B.Tech - Computer Engineering</option>
+                        <option value="B.Tech AIML">B.Tech - AI &amp; Machine Learning</option>
+                        <option value="B.Tech EC">B.Tech - Electronics &amp; Communication</option>
+                    </select>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Academic Year Radio Group -->
+                <div class="form-group">
+                    <label>Current Academic Year *</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="year" value="1" checked> 1st Year
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="year" value="2"> 2nd Year
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="year" value="3"> 3rd Year
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="year" value="4"> 4th Year
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Gender Radio Group -->
+                <div class="form-group">
+                    <label>Gender *</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="Male" checked> Male
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="Female"> Female
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="Other"> Other
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Password with Strength Meter -->
+                <div class="form-group">
+                    <label for="password">Create Password (Min 8 Characters) *</label>
+                    <input type="password" id="password" name="password" placeholder="Create strong password" required autocomplete="new-password">
+                    <div class="strength-meter">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <span class="strength-text" id="strengthText">Enter password</span>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password *</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-type password" required autocomplete="new-password">
+                    <span class="error-message"></span>
+                </div>
+
+                <!-- Terms & Conditions Checkbox -->
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            I declare that all entered information is authentic and I agree to the <a href="FAQ.html" target="_blank" style="text-decoration:underline;">Campus IT Regulations</a>.
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">Create Student Account &rarr;</button>
+
+                <div class="form-footer-link">
+                    Already registered? <a href="Login.html">Sign in here</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026-2027 CampusSync Portal &bull; CHARUSAT FTE &bull; Practical 5 &amp; 9 Implementation</p>
+        </div>
+    </footer>
+</body>
+</html>

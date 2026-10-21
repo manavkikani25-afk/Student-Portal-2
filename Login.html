@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | CampusSync Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="page-login">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="brand-badge">CS</div>
+            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+        </div>
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
+        <nav class="navbar" id="navbar">
+            <a href="Home.html">Home</a>
+            <a href="About.html">About</a>
+            <a href="Courses.html">Courses</a>
+            <a href="Timetable.html">Timetable</a>
+            <a href="StudyMaterial.html">Study Material</a>
+            <a href="events.html">Events</a>
+            <a href="Admission.html">Admissions</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="Help.html">Helpdesk</a>
+            <a href="Signup.html" class="btn btn-sm btn-accent">Register</a>
+            <button id="themeToggle" class="theme-btn" title="Toggle Theme">&#9790;</button>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="form-container" style="max-width: 460px;">
+            <div class="form-head">
+                <span class="badge badge-category" style="margin-bottom: 8px;">Practical 10 Authentication</span>
+                <h2>Sign In to Portal</h2>
+                <p>Enter your verified credentials to access role-based features.</p>
+            </div>
+
+            <!-- Dynamic Feedback Messages -->
+            <div id="authAlerts"></div>
+            <script>
+                const urlParams = new URLSearchParams(window.location.search);
+                const error = urlParams.get('error');
+                const msg = urlParams.get('msg');
+                const alertsDiv = document.getElementById('authAlerts');
+
+                if (error) {
+                    alertsDiv.innerHTML = `<div class="alert alert-error">${decodeURIComponent(error)}</div>`;
+                } else if (msg === 'registered_successfully') {
+                    alertsDiv.innerHTML = `<div class="alert alert-success">Registration completed successfully! Please login with your credentials.</div>`;
+                } else if (msg === 'logged_out') {
+                    alertsDiv.innerHTML = `<div class="alert alert-info">You have been logged out securely. Session ended.</div>`;
+                } else if (msg === 'timeout') {
+                    alertsDiv.innerHTML = `<div class="alert alert-error">Session expired due to 15 minutes of inactivity. Please sign in again.</div>`;
+                } else if (msg === 'login_required') {
+                    alertsDiv.innerHTML = `<div class="alert alert-error">Please login first to access that protected portal area.</div>`;
+                }
+            </script>
+
+            <form action="login.php" method="POST">
+                <div class="form-group">
+                    <label for="email">Registered Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="e.g. aryan@campus.edu" autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label for="password">Password *</label>
+                        <a href="FAQ.html" style="font-size:0.8rem; color:var(--primary);">Forgot?</a>
+                    </div>
+                    <input type="password" id="password" name="password" required placeholder="Enter password" autocomplete="current-password">
+                </div>
+
+                <!-- Remember Me Token Checkbox (Practical 10) -->
+                <div class="form-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="remember_me" id="remember_me">
+                        <span>Keep me logged in for 30 days (Split-token Remember Me)</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size:1rem;">Sign In to Dashboard &rarr;</button>
+
+                <div class="form-footer-link">
+                    Don't have an account? <a href="Signup.html">Register as Student</a>
+                </div>
+            </form>
+
+            <!-- Test Credentials Hint Box for Practical Viva & Evaluation -->
+            <div style="background:var(--bg-surface-alt); border: 1px dashed var(--border-color); border-radius: var(--radius-sm); padding: 14px; margin-top: 24px; font-size: 0.85rem;">
+                <strong>&#128273; Practical Demo Credentials (Pre-seeded):</strong>
+                <div style="margin-top: 6px; line-height: 1.6;">
+                    <div><strong>Admin:</strong> <code>admin@campus.edu</code> / <code>Admin@12345</code></div>
+                    <div><strong>Student:</strong> <code>student@campus.edu</code> / <code>Student@123</code></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026-2027 CampusSync Portal &bull; CHARUSAT FTE &bull; Practical 10 Authentication System</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusSync - Academic &amp; Student Life Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="page-home">
+    <!-- Accessibility Skip Link (Practical 2) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Notification Banner (Practical 4) -->
+    <div class="notification-banner" id="notificationBanner" role="region" aria-label="Announcement">
+        <div class="banner-content">
+            <span class="pulse-dot"></span>
+            <span><strong>Admissions 2026-27:</strong> Registrations are now open for all B.Tech and Postgraduate programs!</span>
+        </div>
+        <button class="btn-close-banner" id="closeBanner" aria-label="Dismiss banner">&times;</button>
+    </div>
+
+    <!-- Header Navigation (Practical 2 & 3) -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="brand-badge">CS</div>
+            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+        </div>
+        <button class="menu-button" id="menuButton" aria-label="Toggle navigation menu">&#9776;</button>
+        <nav class="navbar" id="navbar">
+            <a href="Home.html" class="active">Home</a>
+            <a href="About.html">About</a>
+            <a href="Courses.html">Courses</a>
+            <a href="Timetable.html">Timetable</a>
+            <a href="StudyMaterial.html">Study Material</a>
+            <a href="events.html">Events</a>
+            <a href="Admission.html">Admissions</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="Help.html">Helpdesk</a>
+            <a href="Login.html" class="nav-auth-btn">Sign In</a>
+            <a href="Signup.html" class="btn btn-sm btn-accent">Register</a>
+            <button id="themeToggle" class="theme-btn" title="Toggle Light/Dark Theme">&#9790;</button>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-container">
+                <span class="hero-pill">&#127891; Charusat FTE &bull; ITUE203 Practical Portal</span>
+                <h1 class="hero-title">Your Unified Gateway to <span>Campus Excellence</span></h1>
+                <p class="hero-desc">
+                    Access semester schedules, verified lecture notes, automated event registrations, and real-time academic announcements in one modern, seamless portal.
+                </p>
+                <div class="hero-buttons">
+                    <a href="Signup.html" class="btn btn-primary">&#128640; Student Registration</a>
+                    <a href="events.html" class="btn btn-secondary">&#127881; Browse Campus Events</a>
+                    <button id="openNoticeModal" class="btn btn-secondary">&#128227; Important Notice</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image / Content Carousel Slider (Practical 4) -->
+        <section class="slider-section" aria-label="Campus Highlights">
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Slide 1 -->
+                    <div class="slide">
+                        <div class="slide-bg" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);"></div>
+                        <div class="slide-caption">
+                            <span class="badge badge-category">Academic Excellence</span>
+                            <h3>High-Performance Computing &amp; AI Labs</h3>
+                            <p>State-of-the-art infrastructure powering advanced research in Artificial Intelligence, Cloud Systems, and Web Engineering.</p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slide">
+                        <div class="slide-bg" style="background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);"></div>
+                        <div class="slide-caption">
+                            <span class="badge badge-success">Campus Life</span>
+                            <h3>Spandan Annual Cultural Carnival</h3>
+                            <p>Experience high-energy performing arts, technical competitions, hackathons, and creative innovation across 120+ campus clubs.</p>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="slide">
+                        <div class="slide-bg" style="background: linear-gradient(135deg, #701a75 0%, #4a044e 100%);"></div>
+                        <div class="slide-caption">
+                            <span class="badge badge-warning">Industry Placements</span>
+                            <h3>98%+ Placement Record with Top Tech Leaders</h3>
+                            <p>Global internships and campus recruitment drives with Fortune 500 tech companies and high-growth innovation startups.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Controls -->
+                <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Previous slide">&#10094;</button>
+                <button class="slider-btn slider-next" id="sliderNext" aria-label="Next slide">&#10095;</button>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <!-- Core Features Grid (Practical 3) -->
+        <section class="container">
+            <div class="section-head">
+                <h2>Designed for High-Performing Students</h2>
+                <p>Everything you need to thrive throughout your academic journey at FTE.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#128197;</div>
+                    <h3>Smart Timetables</h3>
+                    <p>Instant access to weekly lecture schedules, laboratory batches, room numbers, and faculty assignments.</p>
+                    <a href="Timetable.html" class="text-link">View Schedule &rarr;</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">&#128218;</div>
+                    <h3>Verified Study Material</h3>
+                    <p>Curated lecture notes, syllabus outlines, question banks, and lab manuals verified by course instructors.</p>
+                    <a href="StudyMaterial.html" class="text-link">Browse Notes &rarr;</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">&#127881;</div>
+                    <h3>Events &amp; Competitions</h3>
+                    <p>Dynamic event calendar with real-time JSON filtering, category sorting, and instant one-click registrations.</p>
+                    <a href="events.html" class="text-link">Explore Events &rarr;</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">&#128222;</div>
+                    <h3>Student Helpdesk</h3>
+                    <p>Direct channel to submit academic queries and grievances with automatic CSV/JSON data preservation.</p>
+                    <a href="Help.html" class="text-link">Reach Helpdesk &rarr;</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">&#128274;</div>
+                    <h3>Secure Authentication</h3>
+                    <p>Bcrypt password encryption, session fixation protection, RBAC admin panels, and split-token remember-me security.</p>
+                    <a href="Login.html" class="text-link">Sign In &rarr;</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">&#9881;</div>
+                    <h3>RESTful JSON APIs</h3>
+                    <p>Fast asynchronous AJAX/Fetch CRUD endpoints enabling smooth data updates without full page reloads.</p>
+                    <a href="ajax_events.html" class="text-link">Open AJAX Module &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Strip -->
+        <section class="stats-strip">
+            <div class="stats-container">
+                <div>
+                    <span class="stat-num">5,200+</span>
+                    <span class="stat-title">Active Students</span>
+                </div>
+                <div>
+                    <span class="stat-num">140+</span>
+                    <span class="stat-title">Faculty Mentors</span>
+                </div>
+                <div>
+                    <span class="stat-num">98.4%</span>
+                    <span class="stat-title">Placement Rate</span>
+                </div>
+                <div>
+                    <span class="stat-num">45+</span>
+                    <span class="stat-title">Technical Clubs</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Preview with Collapsible Accordion (Practical 4) -->
+        <section class="container">
+            <div class="section-head">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions about admissions, portal access, and academic resources.</p>
+            </div>
+
+            <div class="accordion-wrapper">
+                <div class="accordion-item active">
+                    <button class="accordion-header">
+                        <span>How do I create and activate my student account?</span>
+                        <span class="accordion-icon">&#9662;</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Go to the Student Registration page, fill in your enrolled full name, academic email, 10-digit mobile number, program, and secure password. Once submitted, your profile is immediately initialized in the campus directory.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What is the minimum attendance requirement for semester exams?</span>
+                        <span class="accordion-icon">&#9662;</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p>As per university academic regulations, students must maintain at least 80% attendance in theory lectures and 85% in laboratory practical sessions to be eligible for end-semester examinations.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How can I register for hackathons and campus workshops?</span>
+                        <span class="accordion-icon">&#9662;</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Log in with your student credentials and visit the Campus Events section. You can view upcoming events, see venue details, and click "Register Now" to reserve your seat instantly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top: 30px;">
+                <a href="FAQ.html" class="btn btn-secondary">View All FAQs &rarr;</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Notice Popup (Practical 4) -->
+    <div class="modal-overlay" id="campusNoticeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-box">
+            <button class="modal-close-btn" id="closeNoticeModal" aria-label="Close dialog">&times;</button>
+            <span class="badge badge-warning" style="margin-bottom: 10px;">Important Notification</span>
+            <h3 id="modalTitle" style="margin-bottom: 12px;">Semester Mid-Term Schedule Announced</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                The continuous internal evaluation (CIE-2) examinations for 3rd semester engineering students will commence from <strong>November 10, 2026</strong>.
+            </p>
+            <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px; font-size: 0.95rem;">
+                <li>Check your hall tickets on the student dashboard.</li>
+                <li>Verify your subject codes against the official timetable.</li>
+                <li>Clear any pending lab submissions before November 5th.</li>
+            </ul>
+            <div style="text-align: right;">
+                <a href="Timetable.html" class="btn btn-primary btn-sm">Check Timetable</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>CampusSync Portal</h4>
+                <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 14px;">
+                    Modern academic management and student services portal designed for CHARUSAT Faculty of Technology &amp; Engineering.
+                </p>
+                <p style="font-size: 0.85rem; color: #64748b;">Subject: Web Development Frameworks (ITUE203)</p>
+            </div>
+            <div class="footer-col">
+                <h4>Academic Links</h4>
+                <ul>
+                    <li><a href="Courses.html">Programs Offered</a></li>
+                    <li><a href="Timetable.html">Lecture Timetable</a></li>
+                    <li><a href="StudyMaterial.html">Study Material</a></li>
+                    <li><a href="Admission.html">Admissions 2026</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Student Support</h4>
+                <ul>
+                    <li><a href="FAQ.html">Frequently Asked Questions</a></li>
+                    <li><a href="Help.html">Helpdesk Inquiries</a></li>
+                    <li><a href="events.html">Campus Events</a></li>
+                    <li><a href="ajax_events.html">AJAX Live Feed</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Account Access</h4>
+                <ul>
+                    <li><a href="Login.html">Student / Admin Login</a></li>
+                    <li><a href="Signup.html">New Account Registration</a></li>
+                    <li><a href="admin_dashboard.php">Admin Panel</a></li>
+                    <li><a href="fetch.php">PDO Connectivity Demo</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026-2027 CampusSync Portal &bull; CHARUSAT FTE &bull; Crafted for WDF Practical Examination</p>
+        </div>
+    </footer>
+</body>
+</html>

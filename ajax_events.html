@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX / Fetch API CRUD | CampusSync (Practical 13)</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <style>
+        .ajax-status {
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            display: none;
+            font-size: 0.9rem;
+        }
+        .ajax-spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+            margin-right: 6px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="page-ajax">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="brand-badge">CS</div>
+            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+        </div>
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
+        <nav class="navbar" id="navbar">
+            <a href="Home.html">Home</a>
+            <a href="admin_dashboard.php">Admin Dashboard</a>
+            <a href="students.php">Students CRUD</a>
+            <a href="events.php">Events CRUD</a>
+            <a href="ajax_events.html" class="active">AJAX CRUD</a>
+            <a href="Login.html" class="nav-auth-btn">Sign In</a>
+            <button id="themeToggle" class="theme-btn" title="Toggle Theme">&#9790;</button>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="section-head">
+            <span class="hero-pill">&#9881; Practical 13 &bull; REST API &amp; Asynchronous CRUD</span>
+            <h2>AJAX / Fetch-Based CRUD Without Page Reload</h2>
+            <p>Perform Create, Read, Update, and Delete operations on campus events asynchronously consuming <code>api.php</code> via JavaScript Fetch API.</p>
+        </div>
+
+        <div id="ajaxAlert" class="ajax-status"></div>
+
+        <div class="two-col-grid">
+            <!-- Asynchronous Form Card -->
+            <div class="card">
+                <h3 id="formTitle">&#10133; Add Event via JSON API</h3>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">
+                    Submitting this form dispatches an asynchronous HTTP POST or PUT request sending application/json payload to <code>api.php</code>.
+                </p>
+
+                <form id="ajaxEventForm">
+                    <input type="hidden" id="ajaxEventId" value="">
+
+                    <div class="form-group">
+                        <label for="ajaxTitle">Event Title *</label>
+                        <input type="text" id="ajaxTitle" required placeholder="e.g. AI Innovation Summit 2026">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ajaxCategory">Category *</label>
+                        <select id="ajaxCategory" required>
+                            <option value="Technical">Technical</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Seminar">Seminar</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ajaxDate">Date *</label>
+                        <input type="date" id="ajaxDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ajaxTime">Time *</label>
+                        <input type="time" id="ajaxTime" required value="10:00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ajaxVenue">Campus Venue *</label>
+                        <input type="text" id="ajaxVenue" required placeholder="e.g. Auditorium Hall A">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ajaxDescription">Description</label>
+                        <textarea id="ajaxDescription" rows="3" placeholder="Brief event summary..."></textarea>
+                    </div>
+
+                    <div class="form-actions-bar">
+                        <button type="submit" id="ajaxSubmitBtn" class="btn btn-primary">Save Event (AJAX)</button>
+                        <button type="button" id="ajaxCancelBtn" class="btn btn-secondary" style="display:none;">Cancel Edit</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Live Events Table -->
+            <div class="card">
+                <div class="card-head-flex" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3>Live API Event List</h3>
+                    <button id="refreshBtn" class="btn btn-secondary btn-sm">&#128260; Refresh Data</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ajaxTableBody">
+                            <tr><td colspan="5" class="text-center">Loading events via Fetch API...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Client-side Script for Practical 13 Asynchronous CRUD -->
+    <script>
+        const API_URL = "api.php";
+        const form = document.getElementById("ajaxEventForm");
+        const idInput = document.getElementById("ajaxEventId");
+        const titleInput = document.getElementById("ajaxTitle");
+        const catInput = document.getElementById("ajaxCategory");
+        const dateInput = document.getElementById("ajaxDate");
+        const timeInput = document.getElementById("ajaxTime");
+        const venueInput = document.getElementById("ajaxVenue");
+        const descInput = document.getElementById("ajaxDescription");
+        const submitBtn = document.getElementById("ajaxSubmitBtn");
+        const cancelBtn = document.getElementById("ajaxCancelBtn");
+        const formTitle = document.getElementById("formTitle");
+        const tableBody = document.getElementById("ajaxTableBody");
+        const alertBox = document.getElementById("ajaxAlert");
+        const refreshBtn = document.getElementById("refreshBtn");
+
+        function showAlert(msg, isSuccess = true) {
+            alertBox.style.display = "block";
+            alertBox.className = `ajax-status ${isSuccess ? 'alert-success' : 'alert-error'}`;
+            alertBox.textContent = msg;
+            setTimeout(() => { alertBox.style.display = "none"; }, 4000);
+        }
+
+        // Fetch & render list
+        async function loadEvents() {
+            try {
+                const res = await fetch(API_URL);
+                const json = await res.json();
+                if (json.success && Array.isArray(json.data)) {
+                    renderTable(json.data);
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center">No events found in database.</td></tr>`;
+                }
+            } catch (err) {
+                console.error("AJAX Fetch Error:", err);
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center" style="color:red;">Error loading events from ${API_URL}. Ensure MySQL is active.</td></tr>`;
+            }
+        }
+
+        function renderTable(events) {
+            tableBody.innerHTML = "";
+            if (events.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center">No events found.</td></tr>`;
+                return;
+            }
+
+            events.forEach(ev => {
+                const tr = document.createElement("tr");
+                tr.id = `row-${ev.event_id}`;
+                tr.innerHTML = `
+                    <td>#${ev.event_id}</td>
+                    <td><strong>${ev.title}</strong><br><small class="text-muted">${ev.venue}</small></td>
+                    <td><span class="badge badge-category">${ev.category}</span></td>
+                    <td>${ev.event_date}</td>
+                    <td>
+                        <button class="btn-sm btn-edit" onclick="editEvent(${ev.event_id})">&#9998; Edit</button>
+                        <button class="btn-sm btn-delete" onclick="deleteEvent(${ev.event_id}, '${ev.title.replace(/'/g, "\\'")}')">&#128465; Del</button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Fetch single for edit
+        window.editEvent = async function(id) {
+            try {
+                const res = await fetch(`${API_URL}?id=${id}`);
+                const json = await res.json();
+                if (json.success && json.data) {
+                    const d = json.data;
+                    idInput.value = d.event_id;
+                    titleInput.value = d.title;
+                    catInput.value = d.category;
+                    dateInput.value = d.event_date;
+                    timeInput.value = d.event_time ? d.event_time.substring(0, 5) : "10:00";
+                    venueInput.value = d.venue;
+                    descInput.value = d.event_description || "";
+
+                    formTitle.textContent = `\u270E Edit Event (#${d.event_id})`;
+                    submitBtn.textContent = "Update Event (AJAX PUT)";
+                    cancelBtn.style.display = "inline-block";
+                    window.scrollTo({ top: form.offsetTop - 80, behavior: 'smooth' });
+                }
+            } catch (e) {
+                showAlert("Could not retrieve event details: " + e.message, false);
+            }
+        };
+
+        // Asynchronous Delete
+        window.deleteEvent = async function(id, title) {
+            if (!confirm(`Are you sure you want to delete "${title}" asynchronously without reloading the page?`)) {
+                return;
+            }
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ event_id: id })
+                });
+                const json = await res.json();
+                if (json.success) {
+                    showAlert(json.message, true);
+                    const row = document.getElementById(`row-${id}`);
+                    if (row) row.remove();
+                } else {
+                    showAlert(json.message, false);
+                }
+            } catch (err) {
+                showAlert("Delete request failed: " + err.message, false);
+            }
+        };
+
+        // Reset form
+        cancelBtn.addEventListener("click", () => {
+            idInput.value = "";
+            form.reset();
+            formTitle.textContent = "\u2795 Add Event via JSON API";
+            submitBtn.textContent = "Save Event (AJAX)";
+            cancelBtn.style.display = "none";
+        });
+
+        // Form Submit (POST for add, PUT for update)
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const isUpdate = idInput.value !== "";
+            const payload = {
+                title: titleInput.value.trim(),
+                category: catInput.value,
+                event_date: dateInput.value,
+                event_time: timeInput.value + ":00",
+                venue: venueInput.value.trim(),
+                event_description: descInput.value.trim()
+            };
+
+            if (isUpdate) {
+                payload.event_id = parseInt(idInput.value, 10);
+            }
+
+            try {
+                submitBtn.disabled = true;
+                const method = isUpdate ? "PUT" : "POST";
+                const res = await fetch(API_URL, {
+                    method: method,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const json = await res.json();
+
+                if (json.success) {
+                    showAlert(json.message, true);
+                    form.reset();
+                    idInput.value = "";
+                    formTitle.textContent = "\u2795 Add Event via JSON API";
+                    submitBtn.textContent = "Save Event (AJAX)";
+                    cancelBtn.style.display = "none";
+                    loadEvents();
+                } else {
+                    showAlert(json.message, false);
+                }
+            } catch (err) {
+                showAlert("Operation error: " + err.message, false);
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        refreshBtn.addEventListener("click", loadEvents);
+        document.addEventListener("DOMContentLoaded", loadEvents);
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026-2027 CampusSync Portal &bull; CHARUSAT FTE &bull; Practical 13 AJAX/Fetch REST API Integration</p>
+        </div>
+    </footer>
+</body>
+</html>

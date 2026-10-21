@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "title": "TechNova 2026 - National Hackathon",
+    "category": "Technical",
+    "date": "2026-11-15",
+    "time": "09:00 AM",
+    "venue": "Central Computing Lab, Block B",
+    "organizer": "Department of Computer Science & IT",
+    "description": "A 24-hour non-stop coding hackathon challenging students to build innovative AI, IoT, and Web3 solutions for smart campuses.",
+    "seats": 120,
+    "badge": "Popular"
+  },
+  {
+    "id": 2,
+    "title": "Spandan 2026 - Annual Cultural Fest",
+    "category": "Cultural",
+    "date": "2026-12-02",
+    "time": "05:30 PM",
+    "venue": "University Open-Air Amphitheatre",
+    "organizer": "Student Cultural Council",
+    "description": "Celebrate music, classical and western dance, theatre, fine arts, and battle of the bands across three vibrant days.",
+    "seats": 1500,
+    "badge": "Featured"
+  },
+  {
+    "id": 3,
+    "title": "Inter-Department Cricket Tournament",
+    "category": "Sports",
+    "date": "2026-11-20",
+    "time": "08:00 AM",
+    "venue": "University Sports Ground",
+    "organizer": "Department of Physical Education",
+    "description": "Annual leather ball cricket tournament featuring 16 department teams battling for the coveted Chancellor Trophy.",
+    "seats": 300,
+    "badge": "Championship"
+  },
+  {
+    "id": 4,
+    "title": "Full-Stack Web Development Bootcamp",
+    "category": "Workshop",
+    "date": "2026-11-08",
+    "time": "10:30 AM",
+    "venue": "Seminar Hall 3, Engineering Complex",
+    "organizer": "Web Development Club",
+    "description": "Deep-dive hands-on workshop covering REST APIs, modern CSS grid architecture, PHP 8 session security, and MySQL optimization.",
+    "seats": 80,
+    "badge": "Certified"
+  },
+  {
+    "id": 5,
+    "title": "AI & Generative Tech Global Summit",
+    "category": "Seminar",
+    "date": "2026-11-28",
+    "time": "11:00 AM",
+    "venue": "Auditorium Hall A",
+    "organizer": "Faculty of Technology and Engineering",
+    "description": "Industry keynotes from leading AI researchers discussing Large Language Models, agentic workflows, and ethical artificial intelligence.",
+    "seats": 400,
+    "badge": "Keynote"
+  },
+  {
+    "id": 6,
+    "title": "RoboWars & Drone Racing Challenge",
+    "category": "Technical",
+    "date": "2026-12-10",
+    "time": "01:30 PM",
+    "venue": "Mechanical Workshop Arena",
+    "organizer": "Robotics & Automation Society",
+    "description": "Custom wired/wireless combat robot battles and FPV obstacle drone racing with live high-speed telemetry.",
+    "seats": 250,
+    "badge": "Trending"
+  },
+  {
+    "id": 7,
+    "title": "Youth Leadership & Entrepreneurship Conclave",
+    "category": "Seminar",
+    "date": "2026-12-18",
+    "time": "10:00 AM",
+    "venue": "Executive Conference Hall",
+    "organizer": "Center for Innovation & Incubation",
+    "description": "Pitch your startup ideas to venture capitalists, angel investors, and seasoned alumni entrepreneurs.",
+    "seats": 150,
+    "badge": "Funding"
+  },
+  {
+    "id": 8,
+    "title": "Annual Badminton Championship",
+    "category": "Sports",
+    "date": "2026-12-22",
+    "time": "09:00 AM",
+    "venue": "Indoor Sports Complex, Court 1 & 2",
+    "organizer": "Sports Board",
+    "description": "Singles and doubles knockout tournament for boys and girls with official BWF scoring rules.",
+    "seats": 100,
+    "badge": "Sports"
+  }
+]

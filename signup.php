@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Secure User Registration Processor (Practical 9)
+ * Student Portal - Secure User Registration Processor (Practical 9)
  * Server-side input validation, duplicate email check, bcrypt password hashing, and role assignment.
  */
 

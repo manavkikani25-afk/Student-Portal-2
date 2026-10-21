@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Database Connection & Helper Utilities
+ * Student Portal - Database Connection & Helper Utilities
  * Subject: Web Development Frameworks (ITUE203) - Practical 8, 9, 14
  */
 

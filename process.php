@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Form Processor with File Storage (Practical 7)
+ * Student Portal - Form Processor with File Storage (Practical 7)
  * Validates inquiries/feedback, sanitizes input, and saves records into CSV and JSON.
  */
 

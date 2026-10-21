@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Authentication Middleware & Role-Based Access Control (RBAC)
+ * Student Portal - Authentication Middleware & Role-Based Access Control (RBAC)
  * Subject: Web Development Frameworks (ITUE203) - Practical 10, 14
  */
 
@@ -64,7 +64,7 @@ function requireRole($requiredRole) {
         <html lang='en'>
         <head>
             <meta charset='UTF-8'>
-            <title>403 - Access Denied | CampusSync</title>
+            <title>403 - Access Denied | Student Portal</title>
             <link rel='stylesheet' href='style.css'>
             <style>
                 .denied-card {

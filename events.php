@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Event Management CRUD with Poster Upload (Practical 12)
+ * Student Portal - Event Management CRUD with Poster Upload (Practical 12)
  * File type validation, size check, unique naming, old file cleanup, and MySQLi CRUD.
  */
 
@@ -178,7 +178,7 @@ $categories = ['Technical', 'Cultural', 'Sports', 'Workshop', 'Seminar', 'Hackat
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Management CRUD with File Upload | CampusSync Admin</title>
+    <title>Event Management CRUD with File Upload | Student Portal Admin</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -186,8 +186,8 @@ $categories = ['Technical', 'Cultural', 'Sports', 'Workshop', 'Seminar', 'Hackat
     <!-- Navbar -->
     <header class="header">
         <div class="logo-section">
-            <div class="brand-badge">CS</div>
-            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+            <div class="brand-badge">SP</div>
+            <a href="Home.html" class="brand-title">Student<span>Portal</span></a>
         </div>
         <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
         <nav class="navbar" id="navbar">

@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Practical 8: Database Connectivity & PDO Query Demonstration
+ * Student Portal - Practical 8: Database Connectivity & PDO Query Demonstration
  */
 
 require_once __DIR__ . '/db.php';
@@ -11,7 +11,7 @@ require_once __DIR__ . '/db.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practical 8 - Database Connectivity & PDO Demo | CampusSync</title>
+    <title>Practical 8 - Database Connectivity & PDO Demo | Student Portal</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .demo-container {

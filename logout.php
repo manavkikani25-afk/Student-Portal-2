@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Secure Logout Handler (Practical 10)
+ * Student Portal - Secure Logout Handler (Practical 10)
  */
 
 require_once __DIR__ . '/auth.php';

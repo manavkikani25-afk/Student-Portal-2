@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Admin Dashboard with RBAC, Dynamic Menu, and Audit Log (Practical 14)
+ * Student Portal - Admin Dashboard with RBAC, Dynamic Menu, and Audit Log (Practical 14)
  */
 
 require_once __DIR__ . '/auth.php';
@@ -49,7 +49,7 @@ $recentAccounts = $conn->query("
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard &amp; Audit Trail | CampusSync</title>
+    <title>Admin Dashboard &amp; Audit Trail | Student Portal</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -57,8 +57,8 @@ $recentAccounts = $conn->query("
     <!-- Navbar with Dynamic Menu based on Role (Practical 14) -->
     <header class="header">
         <div class="logo-section">
-            <div class="brand-badge">CS</div>
-            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+            <div class="brand-badge">SP</div>
+            <a href="Home.html" class="brand-title">Student<span>Portal</span></a>
         </div>
         <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
         <nav class="navbar" id="navbar">
@@ -79,7 +79,7 @@ $recentAccounts = $conn->query("
         <div class="dashboard-banner">
             <div>
                 <h2>Welcome Back, <?= sanitize_out($adminName) ?>!</h2>
-                <p>CampusSync Central Administration Portal &bull; Role-Based Access Control Active</p>
+                <p>Student Portal Central Administration Portal &bull; Role-Based Access Control Active</p>
             </div>
             <div class="banner-quick-actions">
                 <a href="students.php" class="btn btn-primary">+ Manage Students</a>

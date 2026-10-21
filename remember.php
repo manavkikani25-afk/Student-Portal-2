@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Remember-Me Token Handler (Practical 10)
+ * Student Portal - Remember-Me Token Handler (Practical 10)
  * Uses selector/validator split-token pattern to resist timing attacks.
  */
 

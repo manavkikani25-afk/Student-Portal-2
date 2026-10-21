@@ -1,5 +1,5 @@
 /**
- * CampusSync - Interactive Client-Side JavaScript
+ * Student Portal - Interactive Client-Side JavaScript
  * Subject: Web Development Frameworks (ITUE203) - Practical 4, 5, 6
  */
 

@@ -1,5 +1,5 @@
 -- ==========================================================
--- CampusSync Portal - Complete Database Schema & Seed Data
+-- Student Portal - Complete Database Schema & Seed Data
 -- Subject: Web Development Frameworks (ITUE203)
 -- Database: campussync_db
 -- ==========================================================

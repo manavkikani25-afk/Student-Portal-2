@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Student Portal Dashboard
+ * Student Portal - Student Portal Dashboard
  * Role-Based Access: Student profile, enrolled courses, timetable preview, and registered events.
  */
 
@@ -83,7 +83,7 @@ $availEventsStmt->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard | CampusSync</title>
+    <title>Student Dashboard | Student Portal</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -91,8 +91,8 @@ $availEventsStmt->close();
     <!-- Navbar -->
     <header class="header">
         <div class="logo-section">
-            <div class="brand-badge">CS</div>
-            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+            <div class="brand-badge">SP</div>
+            <a href="Home.html" class="brand-title">Student<span>Portal</span></a>
         </div>
         <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
         <nav class="navbar" id="navbar">

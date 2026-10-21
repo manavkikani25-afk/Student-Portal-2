@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Student Management CRUD Module (Practical 11)
+ * Student Portal - Student Management CRUD Module (Practical 11)
  * Role-Based Access Control, MySQLi Prepared Statements, Search, Filter & CSV Export.
  */
 
@@ -171,7 +171,7 @@ $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech E
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management CRUD | CampusSync Admin</title>
+    <title>Student Management CRUD | Student Portal Admin</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -179,8 +179,8 @@ $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech E
     <!-- Navbar -->
     <header class="header">
         <div class="logo-section">
-            <div class="brand-badge">CS</div>
-            <a href="Home.html" class="brand-title">Campus<span>Sync</span></a>
+            <div class="brand-badge">SP</div>
+            <a href="Home.html" class="brand-title">Student<span>Portal</span></a>
         </div>
         <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
         <nav class="navbar" id="navbar">

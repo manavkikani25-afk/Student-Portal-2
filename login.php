@@ -1,6 +1,6 @@
 <?php
 /**
- * CampusSync - Login Processor (Practical 10)
+ * Student Portal - Login Processor (Practical 10)
  * Verifies credentials, regenerates session ID, handles remember-me, and redirects by role.
  */
 

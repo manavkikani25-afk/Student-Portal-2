@@ -21,7 +21,7 @@
     "id": 4,
     "category": "Portal",
     "question": "How does the Remember-Me feature keep my session secure?",
-    "answer": "CampusSync implements the split-token selector/validator cryptographic standard. The browser stores a randomized token hash, ensuring your credentials cannot be recovered even if the cookie is intercepted."
+    "answer": "Student Portal implements the split-token selector/validator cryptographic standard. The browser stores a randomized token hash, ensuring your credentials cannot be recovered even if the cookie is intercepted."
   },
   {
     "id": 5,

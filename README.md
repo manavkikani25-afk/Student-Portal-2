@@ -1,4 +1,4 @@
-# CampusSync &bull; Integrated Student &amp; Academic Portal
+# Student Portal &bull; Integrated Student &amp; Academic Portal
 ### Subject: Web Development Frameworks (ITUE203) &bull; Semester 3 (2026-27)
 **Faculty of Technology &amp; Engineering (FTE)**  
 **Charotar University of Science and Technology (CHARUSAT)**
@@ -6,7 +6,7 @@
 ---
 
 ## 1. Project Overview
-**CampusSync** is an end-to-end web portal engineered for university students and administrators. Built strictly according to the academic guidelines of **ITUE203 (Web Development Frameworks)**, it covers every syllabus milestone from Practical 1 to Practical 15 without relying on heavy external third-party frameworks like React, Angular, or Laravel.
+**Student Portal** is an end-to-end web portal engineered for university students and administrators. Built strictly according to the academic guidelines of **ITUE203 (Web Development Frameworks)**, it covers every syllabus milestone from Practical 1 to Practical 15 without relying on heavy external third-party frameworks like React, Angular, or Laravel.
 
 ---
 
@@ -28,7 +28,7 @@
 | **Prac 12** | Event Management CRUD with Validated Poster Upload | `events.php`, `uploads/` | Image MIME &amp; extension check (JPG, PNG, WEBP), max 2MB size limit, unique file naming, old poster cleanup on update/delete |
 | **Prac 13** | PHP RESTful JSON API &amp; AJAX CRUD | `api.php`, `ajax_events.html` | JSON endpoints (GET, POST, PUT, DELETE), Fetch API asynchronous CRUD without page refresh, HTTP status codes |
 | **Prac 14** | Admin Dashboard with RBAC, Dynamic Menu &amp; Audit Log | `admin_dashboard.php` | SQL count metrics, latest student registrations, dynamic role-based menus, automated tracking in `audit_logs` |
-| **Prac 15** | Final Integration, Deployment &amp; Documentation | Whole `CampusSync/` Project | End-to-end navigable system, seed database, comprehensive testing report |
+| **Prac 15** | Final Integration, Deployment &amp; Documentation | Whole `Student Portal/` Project | End-to-end navigable system, seed database, comprehensive testing report |
 
 ---
 
@@ -43,9 +43,9 @@
 ## 4. Local Deployment Instructions (XAMPP)
 
 ### Step 1: Copy Project to XAMPP htdocs
-Copy or move the `CampusSync` folder into your XAMPP web root directory:
+Copy or move the `Student Portal` folder into your XAMPP web root directory:
 ```text
-C:\xampp\htdocs\CampusSync
+C:\xampp\htdocs\Student Portal
 ```
 
 ### Step 2: Start Apache and MySQL
@@ -56,24 +56,24 @@ C:\xampp\htdocs\CampusSync
 ### Step 3: Import the Database
 1. Open your web browser and navigate to: [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
 2. Click on the **Import** tab in the top navigation.
-3. Click **Choose File** and select `database.sql` from `C:\xampp\htdocs\CampusSync\database.sql`.
+3. Click **Choose File** and select `database.sql` from `C:\xampp\htdocs\Student Portal\database.sql`.
 4. Click **Import** at the bottom.
 5. The `campussync_db` database will be created with all 7 tables and 22+ pre-seeded student records.
 
 ### Step 4: Open in Web Browser
 Access the portal by visiting:
 ```text
-http://localhost/CampusSync/
+http://localhost/Student Portal/
 ```
 or directly access any specific page:
-- Home: `http://localhost/CampusSync/Home.html`
-- Sign In: `http://localhost/CampusSync/Login.html`
-- Student Registration: `http://localhost/CampusSync/Signup.html`
-- Admin Dashboard: `http://localhost/CampusSync/admin_dashboard.php`
-- Student CRUD: `http://localhost/CampusSync/students.php`
-- Events CRUD: `http://localhost/CampusSync/events.php`
-- AJAX Events: `http://localhost/CampusSync/ajax_events.html`
-- PDO Demo: `http://localhost/CampusSync/fetch.php`
+- Home: `http://localhost/Student Portal/Home.html`
+- Sign In: `http://localhost/Student Portal/Login.html`
+- Student Registration: `http://localhost/Student Portal/Signup.html`
+- Admin Dashboard: `http://localhost/Student Portal/admin_dashboard.php`
+- Student CRUD: `http://localhost/Student Portal/students.php`
+- Events CRUD: `http://localhost/Student Portal/events.php`
+- AJAX Events: `http://localhost/Student Portal/ajax_events.html`
+- PDO Demo: `http://localhost/Student Portal/fetch.php`
 
 ---
 
@@ -88,7 +88,7 @@ or directly access any specific page:
 
 ## 6. Project Directory Structure
 ```text
-CampusSync/
+Student Portal/
 ├── Home.html             # Homepage with Hero, Carousel Slider, Accordion & Modals
 ├── About.html            # Institutional overview, vision, mission & infrastructure
 ├── Courses.html          # Degree curricula (CSE, IT, CE, AIML) & eligibility

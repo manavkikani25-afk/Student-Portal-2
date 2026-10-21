@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - RESTful JSON API Endpoint (Practical 13)
+ * Student Portal - RESTful JSON API Endpoint (Live Mode)
  * Supports GET (list/single), POST (create), PUT (update), and DELETE without page reload.
  */
 

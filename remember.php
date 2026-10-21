@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Remember-Me Token Handler (Practical 10)
+ * Student Portal - Remember-Me Token Handler 
  * Uses selector/validator split-token pattern to resist timing attacks.
  */
 

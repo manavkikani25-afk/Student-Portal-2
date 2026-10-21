@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Student Management CRUD Module (Practical 11)
+ * Student Portal - Student Management CRUD Module 
  * Role-Based Access Control, MySQLi Prepared Statements, Search, Filter & CSV Export.
  */
 
@@ -11,7 +11,7 @@ $message = "";
 $messageType = "";
 $editStudent = null;
 
-// --- CSV Export (Practical 11 Intermediate Extension) ---
+// --- CSV Export  ---
 if (isset($_GET['action']) && $_GET['action'] === 'export_csv') {
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename=students_export_' . date('Ymd_His') . '.csv');
@@ -198,7 +198,7 @@ $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech E
     <main class="admin-container">
         <div class="admin-header-row">
             <div>
-                <h2>Student Management System (Practical 11)</h2>
+                <h2>Student Management System</h2>
                 <p class="subtitle">Add, edit, view, search, filter, and delete student records with MySQLi prepared queries.</p>
             </div>
             <div>

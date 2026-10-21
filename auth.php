@@ -1,7 +1,7 @@
 <?php
 /**
  * Student Portal - Authentication Middleware & Role-Based Access Control (RBAC)
- * Subject: Web Development Frameworks (ITUE203) - Practical 10, 14
+ * Subject: Web Development Frameworks (ITUE203) - , 14
  */
 
 if (session_status() === PHP_SESSION_NONE) {

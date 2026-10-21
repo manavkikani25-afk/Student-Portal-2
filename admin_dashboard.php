@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Admin Dashboard with RBAC, Dynamic Menu, and Audit Log (Practical 14)
+ * Student Portal - Admin Dashboard with RBAC, Dynamic Menu, and Audit Log 
  */
 
 require_once __DIR__ . '/auth.php';
@@ -27,7 +27,7 @@ $latestRegQuery = "
 ";
 $latestRegistrations = $conn->query($latestRegQuery)->fetch_all(MYSQLI_ASSOC);
 
-// 3. Fetch Recent Audit Logs (Practical 14 Requirement)
+// 3. Fetch Recent Audit Logs 
 $auditLogs = $conn->query("
     SELECT log_id, user_name, action, details, ip_address, created_at
     FROM audit_logs
@@ -54,7 +54,7 @@ $recentAccounts = $conn->query("
     <script src="script.js" defer></script>
 </head>
 <body class="page-admin">
-    <!-- Navbar with Dynamic Menu based on Role (Practical 14) -->
+    <!-- Navbar with Dynamic Menu based on Role  -->
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -199,11 +199,11 @@ $recentAccounts = $conn->query("
             </div>
         </div>
 
-        <!-- System Audit Log Section (Practical 14 Core Requirement) -->
+        <!-- System Audit Log Section  -->
         <section class="card audit-card">
             <div class="card-head-flex">
                 <div>
-                    <h3>System Security &amp; Audit Trail (Practical 14)</h3>
+                    <h3>System Security &amp; Audit Trail</h3>
                     <p class="subtitle">Complete audit logs monitoring administrative actions, logins, deletions, and updates.</p>
                 </div>
                 <span class="badge badge-success">&#128274; Audit Tracking Active</span>

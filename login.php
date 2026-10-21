@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Login Processor (Practical 10)
+ * Student Portal - Login Processor 
  * Verifies credentials, regenerates session ID, handles remember-me, and redirects by role.
  */
 

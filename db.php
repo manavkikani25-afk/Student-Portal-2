@@ -1,7 +1,7 @@
 <?php
 /**
  * Student Portal - Database Connection & Helper Utilities
- * Subject: Web Development Frameworks (ITUE203) - Practical 8, 9, 14
+ * Subject: Web Development Frameworks (ITUE203) - , 9, 14
  */
 
 $db_host = "localhost";
@@ -30,7 +30,7 @@ if ($conn->connect_error) {
 
 $conn->set_charset("utf8mb4");
 
-// 2. PDO Connection (for Practical 8 demonstration)
+// 2. PDO Connection (for  demonstration)
 try {
     $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8mb4", $db_user, $db_pass, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -49,7 +49,7 @@ function sanitize_out($value) {
 }
 
 /**
- * Audit log helper (Practical 14)
+ * Audit log helper 
  */
 function logAudit($conn, $userId, $userName, $action, $details) {
     $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';

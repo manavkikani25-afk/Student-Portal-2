@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Secure User Registration Processor (Practical 9)
+ * Student Portal - Secure User Registration Processor 
  * Server-side input validation, duplicate email check, bcrypt password hashing, and role assignment.
  */
 
@@ -58,7 +58,7 @@ if (!empty($errors)) {
     exit();
 }
 
-// 1. Duplicate Email Check (Practical 9 requirement)
+// 1. Duplicate Email Check 
 $checkStmt = $conn->prepare("SELECT user_id FROM users WHERE email = ? LIMIT 1");
 $checkStmt->bind_param("s", $email);
 $checkStmt->execute();
@@ -99,7 +99,7 @@ if ($insertUser->execute()) {
         $roleStmt->close();
     }
 
-    // Also seed into students directory table for Practical 11 synchronization
+    // Also seed into students directory table for  synchronization
     $enrollmentNo = "26D" . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $course), 0, 2)) . str_pad($newUserId + 25, 3, '0', STR_PAD_LEFT);
     $sem = ($year * 2) - 1;
     $studentStmt = $conn->prepare("

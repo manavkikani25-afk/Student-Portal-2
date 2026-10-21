@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Event Management CRUD with Poster Upload (Practical 12)
+ * Student Portal - Event Management CRUD with Poster Upload 
  * File type validation, size check, unique naming, old file cleanup, and MySQLi CRUD.
  */
 
@@ -205,7 +205,7 @@ $categories = ['Technical', 'Cultural', 'Sports', 'Workshop', 'Seminar', 'Hackat
     <main class="admin-container">
         <div class="admin-header-row">
             <div>
-                <h2>Event Management CRUD (Practical 12)</h2>
+                <h2>Event Management System</h2>
                 <p class="subtitle">Create and manage campus events with validated poster image upload (max 2MB, JPG/PNG/WEBP).</p>
             </div>
             <div>

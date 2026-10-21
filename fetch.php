@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Practical 8: Database Connectivity & PDO Query Demonstration
+ * Student Portal - Database Connectivity & PDO Query Demonstration
  */
 
 require_once __DIR__ . '/db.php';
@@ -11,7 +11,7 @@ require_once __DIR__ . '/db.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practical 8 - Database Connectivity & PDO Demo | Student Portal</title>
+    <title>Database Connectivity & PDO Demo | Student Portal</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .demo-container {
@@ -45,7 +45,7 @@ require_once __DIR__ . '/db.php';
 <body class="page-p8">
     <div class="demo-container">
         <a href="Home.html" class="btn btn-secondary" style="margin-bottom: 20px; display:inline-block;">&larr; Back to Portal</a>
-        <h2>Practical 8: MySQL Schema &amp; PDO Connectivity Demonstration</h2>
+        <h2>MySQL Schema &amp; PDO Connectivity Demonstration</h2>
         <p>This page validates the active database connection using <strong>PHP Data Objects (PDO)</strong> with prepared statements and utf8mb4 encoding.</p>
 
         <div style="margin: 20px 0;">

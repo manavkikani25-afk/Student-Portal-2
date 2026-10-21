@@ -1,6 +1,6 @@
 <?php
 /**
- * Student Portal - Form Processor with File Storage (Practical 7)
+ * Student Portal - Form Processor with File Storage 
  * Validates inquiries/feedback, sanitizes input, and saves records into CSV and JSON.
  */
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cleanMsg = filter_var($message, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $timestamp = date("Y-m-d H:i:s");
 
-    // 1. Store in CSV format (Practical 7)
+    // 1. Store in CSV format 
     $csvRow = [$timestamp, $cleanName, $cleanEmail, $cleanCategory, $cleanSubject, $cleanMsg];
     $csvHandle = fopen($csvFile, 'a');
     if ($csvHandle) {
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         fclose($csvHandle);
     }
 
-    // 2. Store in JSON format (Practical 7)
+    // 2. Store in JSON format 
     $existingData = [];
     if (file_exists($jsonFile)) {
         $jsonRaw = file_get_contents($jsonFile);

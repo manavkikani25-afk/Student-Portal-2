@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - Authentication Middleware & Role-Based Access Control (RBAC)
- * Subject: Web Development Frameworks (ITUE203) - , 14
- */
 
 if (session_status() === PHP_SESSION_NONE) {
     ini_set('session.use_strict_mode', '1');
@@ -12,15 +8,13 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/remember.php';
 
-// Attempt persistent login restoration if cookie is present
 restoreRememberLogin($conn);
 
-// Session Inactivity Timeout: 15 minutes (900 seconds)
 $timeout_limit = 900;
 
 if (isset($_SESSION['user_id'])) {
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout_limit)) {
-        // Timed out
+        
         $uid = $_SESSION['user_id'];
         $uname = $_SESSION['full_name'] ?? 'User';
         logAudit($conn, $uid, $uname, 'SESSION_TIMEOUT', 'Session expired due to inactivity.');
@@ -35,16 +29,10 @@ if (isset($_SESSION['user_id'])) {
     $_SESSION['last_activity'] = time();
 }
 
-/**
- * Check if current visitor is logged in
- */
 function isLoggedIn() {
     return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 }
 
-/**
- * Enforce login
- */
 function requireLogin() {
     if (!isLoggedIn()) {
         header("Location: Login.html?msg=login_required");
@@ -52,9 +40,6 @@ function requireLogin() {
     }
 }
 
-/**
- * Enforce specific role (e.g. 'admin')
- */
 function requireRole($requiredRole) {
     requireLogin();
     $currentRole = $_SESSION['role'] ?? 'student';

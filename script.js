@@ -1,20 +1,17 @@
-/**
- * Student Portal - Interactive Client-Side JavaScript
- * Subject: Web Development Frameworks (ITUE203) - Practical 4, 5, 6
- */
+
 
 document.addEventListener("DOMContentLoaded", () => {
-    // -------------------------------------------------------------
-    // 1. Light / Dark Theme Switcher with localStorage (Practical 4)
-    // -------------------------------------------------------------
+    
+    
+    
     const themeToggleBtn = document.getElementById("themeToggle");
     const currentTheme = localStorage.getItem("campussync_theme") || "light";
 
     if (currentTheme === "dark") {
         document.body.classList.add("dark-theme");
-        if (themeToggleBtn) themeToggleBtn.innerHTML = "&#9788;"; // Sun
+        if (themeToggleBtn) themeToggleBtn.innerHTML = "&#9788;"; 
     } else {
-        if (themeToggleBtn) themeToggleBtn.innerHTML = "&#9790;"; // Moon
+        if (themeToggleBtn) themeToggleBtn.innerHTML = "&#9790;"; 
     }
 
     if (themeToggleBtn) {
@@ -25,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // -------------------------------------------------------------
-    // 2. Mobile Hamburger Menu Toggle (Practical 4)
-    // -------------------------------------------------------------
+    
+    
+    
     const menuButton = document.getElementById("menuButton");
     const navbar = document.getElementById("navbar");
 
@@ -36,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             navbar.classList.toggle("show");
         });
 
-        // Close navbar on outside click
+        
         document.addEventListener("click", (e) => {
             if (!navbar.contains(e.target) && !menuButton.contains(e.target)) {
                 navbar.classList.remove("show");
@@ -44,9 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // -------------------------------------------------------------
-    // 3. Notification Announcement Banner Dismissal (Practical 4)
-    // -------------------------------------------------------------
+    
+    
+    
     const banner = document.getElementById("notificationBanner");
     const closeBannerBtn = document.getElementById("closeBanner");
 
@@ -61,9 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // -------------------------------------------------------------
-    // 4. Content / Image Carousel Slider (Practical 4)
-    // -------------------------------------------------------------
+    
+    
+    
     const sliderTrack = document.getElementById("sliderTrack");
     const slides = document.querySelectorAll(".slide");
     const prevBtn = document.getElementById("sliderPrev");
@@ -74,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let currentSlide = 0;
         let slideInterval;
 
-        // Create navigation dots
+        
         if (dotsContainer) {
             dotsContainer.innerHTML = "";
             slides.forEach((_, idx) => {
@@ -117,9 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
         startAutoplay();
     }
 
-    // -------------------------------------------------------------
-    // 5. Collapsible Accordion (Practical 4 & FAQ)
-    // -------------------------------------------------------------
+    
+    
+    
     const accordionHeaders = document.querySelectorAll(".accordion-header");
 
     accordionHeaders.forEach(header => {
@@ -127,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const parentItem = header.parentElement;
             const isOpen = parentItem.classList.contains("active");
 
-            // Close other accordions in the same group
+            
             document.querySelectorAll(".accordion-item").forEach(item => {
                 item.classList.remove("active");
             });
@@ -138,9 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // -------------------------------------------------------------
-    // 6. Modal Popup Notification (Practical 4)
-    // -------------------------------------------------------------
+    
+    
+    
     const modal = document.getElementById("campusNoticeModal");
     const openModalBtn = document.getElementById("openNoticeModal");
     const closeModalBtn = document.getElementById("closeNoticeModal");
@@ -163,9 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // -------------------------------------------------------------
-    // 7. Student Registration Form Validation (Practical 5)
-    // -------------------------------------------------------------
+    
+    
+    
     const signupForm = document.getElementById("registrationForm");
 
     if (signupForm) {
@@ -180,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const strengthFill = document.getElementById("strengthFill");
         const strengthText = document.getElementById("strengthText");
 
-        // Regex patterns
+        
         const nameRegex = /^[A-Za-z\s]{3,50}$/;
         const emailRegex = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
         const mobileRegex = /^[6-9]\d{9}$/;
@@ -201,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        // Real-time Name Validation
+        
         if (nameInput) {
             nameInput.addEventListener("input", () => {
                 if (!nameRegex.test(nameInput.value.trim())) {
@@ -212,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Real-time Email Validation
+        
         if (emailInput) {
             emailInput.addEventListener("input", () => {
                 if (!emailRegex.test(emailInput.value.trim())) {
@@ -223,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Real-time Mobile Validation
+        
         if (mobileInput) {
             mobileInput.addEventListener("input", () => {
                 if (!mobileRegex.test(mobileInput.value.trim())) {
@@ -234,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Password Strength Meter (Practical 5 requirement)
+        
         if (pwdInput && strengthFill && strengthText) {
             pwdInput.addEventListener("input", () => {
                 const val = pwdInput.value;
@@ -253,24 +250,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     strengthText.style.color = "var(--text-muted)";
                 } else if (score <= 2) {
                     strengthFill.style.width = "30%";
-                    strengthFill.style.backgroundColor = "#ef4444"; // red
+                    strengthFill.style.backgroundColor = "#ef4444"; 
                     strengthText.textContent = "Weak (Include uppercase, numbers & symbols)";
                     strengthText.style.color = "#ef4444";
                 } else if (score === 3 || score === 4) {
                     strengthFill.style.width = "70%";
-                    strengthFill.style.backgroundColor = "#f59e0b"; // yellow
+                    strengthFill.style.backgroundColor = "#f59e0b"; 
                     strengthText.textContent = "Medium Strength";
                     strengthText.style.color = "#f59e0b";
                 } else {
                     strengthFill.style.width = "100%";
-                    strengthFill.style.backgroundColor = "#10b981"; // green
+                    strengthFill.style.backgroundColor = "#10b981"; 
                     strengthText.textContent = "Strong Password ✓";
                     strengthText.style.color = "#10b981";
                 }
             });
         }
 
-        // Confirm Password Match Check
+        
         if (confirmPwdInput) {
             confirmPwdInput.addEventListener("input", () => {
                 if (confirmPwdInput.value !== pwdInput.value) {
@@ -281,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Form Submit Handler
+        
         signupForm.addEventListener("submit", (e) => {
             let isValid = true;
 
@@ -326,9 +323,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // -------------------------------------------------------------
-    // 8. Fetch API External JSON Data Rendering (Practical 6)
-    // -------------------------------------------------------------
+    
+    
+    
     const eventsContainer = document.getElementById("eventsJsonList");
     const eventSearchInput = document.getElementById("eventSearch");
     const eventCategoryFilter = document.getElementById("eventCategoryFilter");
@@ -341,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let currentPage = 1;
         const itemsPerPage = 4;
 
-        // Fetch JSON data
+        
         fetch("events.json")
             .then(res => {
                 if (!res.ok) throw new Error("Network response was not ok");
@@ -373,7 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Pagination slice
+            
             const startIndex = (currentPage - 1) * itemsPerPage;
             const paginatedItems = filteredEvents.slice(startIndex, startIndex + itemsPerPage);
 
@@ -406,7 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
             if (totalPages <= 1) return;
 
-            // Prev Button
+            
             const prev = document.createElement("button");
             prev.className = "btn btn-secondary btn-sm";
             prev.textContent = "« Prev";
@@ -419,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             paginationContainer.appendChild(prev);
 
-            // Page numbers
+            
             for (let i = 1; i <= totalPages; i++) {
                 const pageBtn = document.createElement("button");
                 pageBtn.className = `btn btn-sm ${i === currentPage ? "btn-primary" : "btn-secondary"}`;
@@ -431,7 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 paginationContainer.appendChild(pageBtn);
             }
 
-            // Next Button
+            
             const next = document.createElement("button");
             next.className = "btn btn-secondary btn-sm";
             next.textContent = "Next »";
@@ -459,7 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return matchesQuery && matchesCategory;
             });
 
-            // Sorting
+            
             filteredEvents.sort((a, b) => {
                 if (sortMode === "date-asc") return new Date(a.date) - new Date(b.date);
                 if (sortMode === "date-desc") return new Date(b.date) - new Date(a.date);

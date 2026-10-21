@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - RESTful JSON API Endpoint (Live Mode)
- * Supports GET (list/single), POST (create), PUT (update), and DELETE without page reload.
- */
 
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
@@ -32,11 +28,9 @@ function jsonResponse($statusCode, $success, $message, $data = null) {
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Parse incoming JSON body for POST/PUT/DELETE
 $rawBody = file_get_contents("php://input");
 $input = json_decode($rawBody, true) ?? [];
 
-// 1. GET Request: List all events or get single event
 if ($method === 'GET') {
     if (isset($_GET['id'])) {
         $id = (int)$_GET['id'];
@@ -52,7 +46,7 @@ if ($method === 'GET') {
             jsonResponse(404, false, "Event not found with ID: $id");
         }
     } else {
-        // Query with optional category filter
+        
         $cat = trim($_GET['category'] ?? '');
         if (!empty($cat)) {
             $stmt = $conn->prepare("SELECT * FROM events WHERE category = ? ORDER BY event_date ASC");
@@ -68,7 +62,6 @@ if ($method === 'GET') {
     }
 }
 
-// 2. POST Request: Add new event
 elseif ($method === 'POST') {
     $title = trim($input['title'] ?? $_POST['title'] ?? '');
     $category = trim($input['category'] ?? $_POST['category'] ?? 'Technical');
@@ -93,7 +86,6 @@ elseif ($method === 'POST') {
     }
 }
 
-// 3. PUT Request: Update event
 elseif ($method === 'PUT') {
     $id = (int)($input['event_id'] ?? $_GET['id'] ?? 0);
     if ($id <= 0) {
@@ -123,7 +115,6 @@ elseif ($method === 'PUT') {
     }
 }
 
-// 4. DELETE Request: Delete event
 elseif ($method === 'DELETE') {
     $id = (int)($input['event_id'] ?? $_GET['id'] ?? 0);
     if ($id <= 0) {

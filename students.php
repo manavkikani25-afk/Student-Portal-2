@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - Student Management CRUD Module 
- * Role-Based Access Control, MySQLi Prepared Statements, Search, Filter & CSV Export.
- */
 
 require_once __DIR__ . '/auth.php';
 requireRole('admin');
@@ -11,7 +7,6 @@ $message = "";
 $messageType = "";
 $editStudent = null;
 
-// --- CSV Export  ---
 if (isset($_GET['action']) && $_GET['action'] === 'export_csv') {
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename=students_export_' . date('Ymd_His') . '.csv');
@@ -28,7 +23,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'export_csv') {
     exit();
 }
 
-// --- Form POST Handlers (Add, Update, Delete) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $studentId = (int)($_POST['student_id'] ?? 0);
@@ -58,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $semester = (int)($_POST['semester'] ?? 1);
         $status = $_POST['status'] ?? 'Active';
 
-        // Validation
+        
         if (empty($enrollmentNo) || empty($fullName) || empty($email) || empty($mobile) || empty($course)) {
             $message = "All mandatory fields must be completed.";
             $messageType = "error";
@@ -70,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $messageType = "error";
         } else {
             if ($action === 'add') {
-                // Check duplicate enrollment/email
+                
                 $chk = $conn->prepare("SELECT student_id FROM students WHERE enrollment_no = ? OR email = ?");
                 $chk->bind_param("ss", $enrollmentNo, $email);
                 $chk->execute();
@@ -109,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Check if edit mode requested
 if (isset($_GET['edit'])) {
     $editId = (int)$_GET['edit'];
     $stmt = $conn->prepare("SELECT * FROM students WHERE student_id = ?");
@@ -122,7 +115,6 @@ if (isset($_GET['edit'])) {
     $stmt->close();
 }
 
-// Search and Filter logic
 $searchQuery = trim($_GET['search'] ?? '');
 $filterCourse = trim($_GET['course'] ?? '');
 $filterStatus = trim($_GET['status'] ?? '');
@@ -163,7 +155,6 @@ $stmt->execute();
 $students = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
-// Distinct courses for dropdown
 $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech EC'];
 ?>
 <!DOCTYPE html>
@@ -176,7 +167,7 @@ $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech E
     <script src="script.js" defer></script>
 </head>
 <body class="page-admin">
-    <!-- Navbar -->
+    
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -212,7 +203,7 @@ $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech E
             </div>
         <?php endif; ?>
 
-        <!-- Form Card (Add / Edit) -->
+        
         <section class="card form-card">
             <h3><?= $editStudent ? "Edit Student Record (#" . sanitize_out($editStudent['student_id']) . ")" : "Add New Student Record" ?></h3>
             <form action="students.php" method="POST" class="grid-form">
@@ -276,7 +267,7 @@ $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech E
             </form>
         </section>
 
-        <!-- Search & Filter Controls -->
+        
         <section class="card filter-card">
             <form action="students.php" method="GET" class="filter-flex">
                 <input type="text" name="search" placeholder="Search by name, email, roll no..." value="<?= sanitize_out($searchQuery) ?>" class="filter-input">
@@ -302,7 +293,7 @@ $coursesList = ['B.Tech CSE', 'B.Tech IT', 'B.Tech CE', 'B.Tech AIML', 'B.Tech E
             </form>
         </section>
 
-        <!-- Student Records Table -->
+        
         <section class="card table-card">
             <div class="table-meta">
                 <h3>Enrolled Students List</h3>

@@ -1,7 +1,4 @@
 <?php
-/**
- * Student Portal - Database Connectivity & PDO Query Demonstration
- */
 
 require_once __DIR__ . '/db.php';
 

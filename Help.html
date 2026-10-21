@@ -10,7 +10,7 @@
 <body class="page-help">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
+    
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -39,10 +39,10 @@
             <p>Submit inquiries or academic concerns. Submissions are processed via PHP and stored in CSV and JSON formats.</p>
         </div>
 
-        <!-- Query Feedback Banner -->
+        
         <div id="urlAlertContainer"></div>
         <script>
-            // Parse query string for feedback message from process.php
+            
             const urlParams = new URLSearchParams(window.location.search);
             const status = urlParams.get('status');
             const msg = urlParams.get('msg');
@@ -55,7 +55,7 @@
         </script>
 
         <div class="two-col-grid">
-            <!-- Contact Details Card -->
+            
             <div class="card">
                 <h3>Campus Assistance Contacts</h3>
                 <p style="color:var(--text-secondary); margin: 12px 0 20px 0;">
@@ -92,7 +92,7 @@
                 </div>
             </div>
 
-            <!-- Inquiries Form Card  -->
+            
             <div class="card">
                 <h3>Submit an Inquiry or Grievance</h3>
                 <form action="process.php" method="POST" style="margin-top: 20px;">
@@ -133,7 +133,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-col">

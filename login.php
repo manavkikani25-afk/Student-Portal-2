@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - Login Processor 
- * Verifies credentials, regenerates session ID, handles remember-me, and redirects by role.
- */
 
 require_once __DIR__ . '/auth.php';
 
@@ -25,7 +21,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-// Fetch user with role
 $sql = "
     SELECT u.user_id, u.full_name, u.email, u.password, COALESCE(ur.role, 'student') AS role
     FROM users u
@@ -48,7 +43,7 @@ if ($result->num_rows === 1) {
     $user = $result->fetch_assoc();
 
     if (password_verify($password, $user['password'])) {
-        // Prevent session fixation
+        
         session_regenerate_id(true);
 
         $_SESSION['user_id'] = (int)$user['user_id'];
@@ -61,12 +56,12 @@ if ($result->num_rows === 1) {
             setRememberMeCookie($user['user_id'], $conn);
         }
 
-        // Record Audit Trail
+        
         logAudit($conn, $user['user_id'], $user['full_name'], 'USER_LOGIN', "Successful login as " . $user['role']);
 
         $stmt->close();
 
-        // Role-based redirection
+        
         if ($user['role'] === 'admin') {
             header("Location: admin_dashboard.php");
         } else {
@@ -78,7 +73,6 @@ if ($result->num_rows === 1) {
 
 $stmt->close();
 
-// Audit failed attempt
 $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
 $failStmt = $conn->prepare("INSERT INTO audit_logs (user_name, action, details, ip_address) VALUES (?, 'LOGIN_FAILED', ?, ?)");
 if ($failStmt) {

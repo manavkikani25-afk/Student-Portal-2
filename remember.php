@@ -1,19 +1,15 @@
 <?php
-/**
- * Student Portal - Remember-Me Token Handler 
- * Uses selector/validator split-token pattern to resist timing attacks.
- */
 
 require_once __DIR__ . '/db.php';
 
 function setRememberMeCookie($userId, $conn) {
-    // Generate 12 bytes = 24 hex chars selector, 32 bytes validator
+    
     $selector = bin2hex(random_bytes(12));
     $validator = bin2hex(random_bytes(32));
     $tokenHash = hash('sha256', $validator);
-    $expiresAt = date('Y-m-d H:i:s', time() + (86400 * 30)); // 30 days
+    $expiresAt = date('Y-m-d H:i:s', time() + (86400 * 30)); 
 
-    // Clean old tokens for this user
+    
     $del = $conn->prepare("DELETE FROM remember_tokens WHERE user_id = ?");
     if ($del) {
         $del->bind_param("i", $userId);
@@ -21,14 +17,14 @@ function setRememberMeCookie($userId, $conn) {
         $del->close();
     }
 
-    // Insert new token
+    
     $stmt = $conn->prepare("INSERT INTO remember_tokens (user_id, selector, token_hash, expires_at) VALUES (?, ?, ?, ?)");
     if ($stmt) {
         $stmt->bind_param("isss", $userId, $selector, $tokenHash, $expiresAt);
         $stmt->execute();
         $stmt->close();
 
-        // Set secure cookie
+        
         $cookieValue = $selector . ':' . $validator;
         setcookie('remember_me', $cookieValue, [
             'expires'  => time() + (86400 * 30),
@@ -68,7 +64,7 @@ function restoreRememberLogin($conn) {
         if ($row = $result->fetch_assoc()) {
             $expectedHash = hash('sha256', $validator);
             if (hash_equals($row['token_hash'], $expectedHash)) {
-                // Regenerate session ID and restore session
+                
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = (int)$row['user_id'];
                 $_SESSION['full_name'] = $row['full_name'];

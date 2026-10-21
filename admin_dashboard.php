@@ -1,7 +1,4 @@
 <?php
-/**
- * Student Portal - Admin Dashboard with RBAC, Dynamic Menu, and Audit Log 
- */
 
 require_once __DIR__ . '/auth.php';
 requireRole('admin');
@@ -9,14 +6,12 @@ requireRole('admin');
 $adminName = $_SESSION['full_name'] ?? 'Administrator';
 $adminEmail = $_SESSION['email'] ?? 'admin@campus.edu';
 
-// 1. Fetch Dynamic Statistics (SQL Aggregations)
 $totalUsers = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'] ?? 0;
 $totalStudents = $conn->query("SELECT COUNT(*) AS total FROM students")->fetch_assoc()['total'] ?? 0;
 $totalAdmins = $conn->query("SELECT COUNT(*) AS total FROM user_roles WHERE role = 'admin'")->fetch_assoc()['total'] ?? 0;
 $totalEvents = $conn->query("SELECT COUNT(*) AS total FROM events")->fetch_assoc()['total'] ?? 0;
 $totalRegistrations = $conn->query("SELECT COUNT(*) AS total FROM registrations")->fetch_assoc()['total'] ?? 0;
 
-// 2. Fetch Latest Registrations
 $latestRegQuery = "
     SELECT r.registration_id, r.registered_at, u.full_name AS student_name, u.email, e.title AS event_title, e.category
     FROM registrations r
@@ -27,7 +22,6 @@ $latestRegQuery = "
 ";
 $latestRegistrations = $conn->query($latestRegQuery)->fetch_all(MYSQLI_ASSOC);
 
-// 3. Fetch Recent Audit Logs 
 $auditLogs = $conn->query("
     SELECT log_id, user_name, action, details, ip_address, created_at
     FROM audit_logs
@@ -35,7 +29,6 @@ $auditLogs = $conn->query("
     LIMIT 10
 ")->fetch_all(MYSQLI_ASSOC);
 
-// 4. Fetch Quick Student Accounts list
 $recentAccounts = $conn->query("
     SELECT u.user_id, u.full_name, u.email, u.course, u.created_at, COALESCE(ur.role, 'student') as role
     FROM users u
@@ -54,7 +47,7 @@ $recentAccounts = $conn->query("
     <script src="script.js" defer></script>
 </head>
 <body class="page-admin">
-    <!-- Navbar with Dynamic Menu based on Role  -->
+    
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -75,7 +68,7 @@ $recentAccounts = $conn->query("
     </header>
 
     <main class="admin-container">
-        <!-- Dashboard Welcome Banner -->
+        
         <div class="dashboard-banner">
             <div>
                 <h2>Welcome Back, <?= sanitize_out($adminName) ?>!</h2>
@@ -87,7 +80,7 @@ $recentAccounts = $conn->query("
             </div>
         </div>
 
-        <!-- Metric Stat Cards -->
+        
         <section class="stat-grid">
             <div class="stat-card stat-indigo">
                 <div class="stat-icon">&#127891;</div>
@@ -122,9 +115,9 @@ $recentAccounts = $conn->query("
             </div>
         </section>
 
-        <!-- Two-Column Section: Latest Registrations & Recent Accounts -->
+        
         <div class="two-col-grid">
-            <!-- Latest Event Registrations -->
+            
             <div class="card">
                 <div class="card-head-flex">
                     <h3>Latest Event Signups</h3>
@@ -161,7 +154,7 @@ $recentAccounts = $conn->query("
                 </div>
             </div>
 
-            <!-- Recent Registered Users -->
+            
             <div class="card">
                 <div class="card-head-flex">
                     <h3>Recent User Signups</h3>
@@ -199,7 +192,7 @@ $recentAccounts = $conn->query("
             </div>
         </div>
 
-        <!-- System Audit Log Section  -->
+        
         <section class="card audit-card">
             <div class="card-head-flex">
                 <div>

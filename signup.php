@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - Secure User Registration Processor 
- * Server-side input validation, duplicate email check, bcrypt password hashing, and role assignment.
- */
 
 require_once __DIR__ . '/db.php';
 
@@ -21,7 +17,6 @@ $year = (int)($_POST['year'] ?? 1);
 $gender = trim($_POST['gender'] ?? 'Other');
 $terms = isset($_POST['terms']);
 
-// Server-side Validations
 $errors = [];
 
 if (empty($fullName) || strlen($fullName) < 3 || strlen($fullName) > 50) {
@@ -58,7 +53,6 @@ if (!empty($errors)) {
     exit();
 }
 
-// 1. Duplicate Email Check 
 $checkStmt = $conn->prepare("SELECT user_id FROM users WHERE email = ? LIMIT 1");
 $checkStmt->bind_param("s", $email);
 $checkStmt->execute();
@@ -71,10 +65,8 @@ if ($checkResult->num_rows > 0) {
 }
 $checkStmt->close();
 
-// 2. Hash Password Securely (Bcrypt / Argon2 via PASSWORD_DEFAULT)
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-// 3. Database Insert
 $insertUser = $conn->prepare("
     INSERT INTO users (full_name, email, mobile, password, course, year, gender)
     VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -91,7 +83,7 @@ if ($insertUser->execute()) {
     $newUserId = $conn->insert_id;
     $insertUser->close();
 
-    // Assign Role: student
+    
     $roleStmt = $conn->prepare("INSERT INTO user_roles (user_id, role) VALUES (?, 'student')");
     if ($roleStmt) {
         $roleStmt->bind_param("i", $newUserId);
@@ -99,7 +91,7 @@ if ($insertUser->execute()) {
         $roleStmt->close();
     }
 
-    // Also seed into students directory table for  synchronization
+    
     $enrollmentNo = "26D" . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $course), 0, 2)) . str_pad($newUserId + 25, 3, '0', STR_PAD_LEFT);
     $sem = ($year * 2) - 1;
     $studentStmt = $conn->prepare("
@@ -113,7 +105,7 @@ if ($insertUser->execute()) {
         $studentStmt->close();
     }
 
-    // Log Audit
+    
     logAudit($conn, $newUserId, $fullName, 'USER_REGISTER', "New student registered with email: $email and course: $course");
 
     header("Location: Login.html?msg=registered_successfully");

@@ -10,7 +10,7 @@
 <body class="page-signup">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
+    
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -40,7 +40,7 @@
                 <p>Create your portal account with verified academic credentials.</p>
             </div>
 
-            <!-- Error Banner from Server -->
+            
             <div id="serverErrorContainer"></div>
             <script>
                 const params = new URLSearchParams(window.location.search);
@@ -54,28 +54,28 @@
             </script>
 
             <form action="signup.php" method="POST" id="registrationForm" novalidate>
-                <!-- Full Name -->
+                
                 <div class="form-group">
                     <label for="full_name">Full Name *</label>
                     <input type="text" id="full_name" name="full_name" placeholder="e.g. Aryan Sharma" required autocomplete="name">
                     <span class="error-message"></span>
                 </div>
 
-                <!-- Academic Email -->
+                
                 <div class="form-group">
                     <label for="email">Email Address *</label>
                     <input type="email" id="email" name="email" placeholder="e.g. aryan.sharma@campus.edu" required autocomplete="email">
                     <span class="error-message"></span>
                 </div>
 
-                <!-- Mobile Number -->
+                
                 <div class="form-group">
                     <label for="mobile">Mobile Number (10 Digits) *</label>
                     <input type="tel" id="mobile" name="mobile" placeholder="e.g. 9825012345" required maxlength="10" autocomplete="tel">
                     <span class="error-message"></span>
                 </div>
 
-                <!-- Course Selection -->
+                
                 <div class="form-group">
                     <label for="course">Academic Program / Department *</label>
                     <select id="course" name="course" required>
@@ -89,7 +89,7 @@
                     <span class="error-message"></span>
                 </div>
 
-                <!-- Academic Year Radio Group -->
+                
                 <div class="form-group">
                     <label>Current Academic Year *</label>
                     <div class="radio-group">
@@ -108,7 +108,7 @@
                     </div>
                 </div>
 
-                <!-- Gender Radio Group -->
+                
                 <div class="form-group">
                     <label>Gender *</label>
                     <div class="radio-group">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                <!-- Password with Strength Meter -->
+                
                 <div class="form-group">
                     <label for="password">Create Password (Min 8 Characters) *</label>
                     <input type="password" id="password" name="password" placeholder="Create strong password" required autocomplete="new-password">
@@ -137,14 +137,14 @@
                     <span class="error-message"></span>
                 </div>
 
-                <!-- Confirm Password -->
+                
                 <div class="form-group">
                     <label for="confirm_password">Confirm Password *</label>
                     <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-type password" required autocomplete="new-password">
                     <span class="error-message"></span>
                 </div>
 
-                <!-- Terms & Conditions Checkbox -->
+                
                 <div class="form-group">
                     <div class="checkbox-group">
                         <label class="checkbox-item">
@@ -163,7 +163,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="footer-bottom">
             <p>&copy; 2026-2027 Student Portal &bull; CHARUSAT FTE &bull; Student Services</p>

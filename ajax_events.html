@@ -30,7 +30,7 @@
 <body class="page-ajax">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
+    
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -58,7 +58,7 @@
         <div id="ajaxAlert" class="ajax-status"></div>
 
         <div class="two-col-grid">
-            <!-- Asynchronous Form Card -->
+            
             <div class="card">
                 <h3 id="formTitle">&#10133; Add Event via JSON API</h3>
                 <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">
@@ -111,7 +111,7 @@
                 </form>
             </div>
 
-            <!-- Live Events Table -->
+            
             <div class="card">
                 <div class="card-head-flex" style="display:flex; justify-content:space-between; align-items:center;">
                     <h3>Live API Event List</h3>
@@ -138,7 +138,7 @@
         </div>
     </main>
 
-    <!-- Client-side Script for  Asynchronous CRUD -->
+    
     <script>
         const API_URL = "api.php";
         const form = document.getElementById("ajaxEventForm");
@@ -163,7 +163,7 @@
             setTimeout(() => { alertBox.style.display = "none"; }, 4000);
         }
 
-        // Fetch & render list
+        
         async function loadEvents() {
             try {
                 const res = await fetch(API_URL);
@@ -253,7 +253,7 @@
             }
         };
 
-        // Reset form
+        
         cancelBtn.addEventListener("click", () => {
             idInput.value = "";
             form.reset();
@@ -312,7 +312,7 @@
         document.addEventListener("DOMContentLoaded", loadEvents);
     </script>
 
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="footer-bottom">
             <p>&copy; 2026-2027 Student Portal &bull; CHARUSAT FTE &bull; Interactive Services</p>

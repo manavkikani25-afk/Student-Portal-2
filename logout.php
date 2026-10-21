@@ -1,7 +1,4 @@
 <?php
-/**
- * Student Portal - Secure Logout Handler 
- */
 
 require_once __DIR__ . '/auth.php';
 

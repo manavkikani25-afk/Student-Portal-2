@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - Event Management CRUD with Poster Upload 
- * File type validation, size check, unique naming, old file cleanup, and MySQLi CRUD.
- */
 
 require_once __DIR__ . '/auth.php';
 requireRole('admin');
@@ -16,14 +12,13 @@ if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
 
-// Handle Form Submissions (Add, Update, Delete)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $eventId = (int)($_POST['event_id'] ?? 0);
 
     if ($action === 'delete') {
         if ($eventId > 0) {
-            // Find existing poster to unlink
+            
             $find = $conn->prepare("SELECT poster, title FROM events WHERE event_id = ?");
             $find->bind_param("i", $eventId);
             $find->execute();
@@ -57,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $description = trim($_POST['event_description'] ?? '');
         $status = $_POST['status'] ?? 'Upcoming';
 
-        // Validation
+        
         if (empty($title) || empty($eventDate) || empty($eventTime) || empty($venue)) {
             $message = "Please fill in all required event details.";
             $messageType = "error";
@@ -65,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newPosterName = null;
             $uploadError = false;
 
-            // Handle file upload if provided
+            
             if (isset($_FILES['poster']) && $_FILES['poster']['error'] !== UPLOAD_ERR_NO_FILE) {
                 $file = $_FILES['poster'];
 
@@ -73,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $message = "File upload failed with error code: " . $file['error'];
                     $messageType = "error";
                     $uploadError = true;
-                } elseif ($file['size'] > 2 * 1024 * 1024) { // 2MB Max
+                } elseif ($file['size'] > 2 * 1024 * 1024) { 
                     $message = "Event poster must not exceed 2 MB.";
                     $messageType = "error";
                     $uploadError = true;
@@ -81,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $allowedExts = ['jpg', 'jpeg', 'png', 'webp'];
                     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-                    // Verify MIME type using finfo
+                    
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mime = finfo_file($finfo, $file['tmp_name']);
                     finfo_close($finfo);
@@ -93,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $messageType = "error";
                         $uploadError = true;
                     } else {
-                        // Unique safe file name
+                        
                         $newPosterName = uniqid("event_poster_", true) . "." . $ext;
                         $dest = $uploadDir . $newPosterName;
 
@@ -121,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     $stmt->close();
                 } elseif ($action === 'update' && $eventId > 0) {
-                    // Check if previous poster exists
+                    
                     $oldFind = $conn->prepare("SELECT poster FROM events WHERE event_id = ?");
                     $oldFind->bind_param("i", $eventId);
                     $oldFind->execute();
@@ -129,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $oldFind->close();
 
                     if ($newPosterName !== null) {
-                        // Clean up old poster
+                        
                         if (!empty($oldRow['poster']) && file_exists($uploadDir . basename($oldRow['poster']))) {
                             unlink($uploadDir . basename($oldRow['poster']));
                         }
@@ -156,7 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// If Edit requested
 if (isset($_GET['edit'])) {
     $eId = (int)$_GET['edit'];
     $stmt = $conn->prepare("SELECT * FROM events WHERE event_id = ?");
@@ -169,7 +163,6 @@ if (isset($_GET['edit'])) {
     $stmt->close();
 }
 
-// Fetch all events
 $events = $conn->query("SELECT * FROM events ORDER BY event_date ASC, event_time ASC")->fetch_all(MYSQLI_ASSOC);
 $categories = ['Technical', 'Cultural', 'Sports', 'Workshop', 'Seminar', 'Hackathon'];
 ?>
@@ -183,7 +176,7 @@ $categories = ['Technical', 'Cultural', 'Sports', 'Workshop', 'Seminar', 'Hackat
     <script src="script.js" defer></script>
 </head>
 <body class="page-admin">
-    <!-- Navbar -->
+    
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -219,7 +212,7 @@ $categories = ['Technical', 'Cultural', 'Sports', 'Workshop', 'Seminar', 'Hackat
             </div>
         <?php endif; ?>
 
-        <!-- Form Card (Add/Edit) -->
+        
         <section class="card form-card">
             <h3><?= $editEvent ? "Edit Event (#" . sanitize_out($editEvent['event_id']) . ")" : "Add New Campus Event" ?></h3>
             <form action="events.php" method="POST" enctype="multipart/form-data" class="grid-form">
@@ -290,7 +283,7 @@ $categories = ['Technical', 'Cultural', 'Sports', 'Workshop', 'Seminar', 'Hackat
             </form>
         </section>
 
-        <!-- Events List Table -->
+        
         <section class="card table-card">
             <h3>Published Events (<?= count($events) ?>)</h3>
             <div class="table-responsive">

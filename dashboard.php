@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - Student Portal Dashboard
- * Role-Based Access: Student profile, enrolled courses, timetable preview, and registered events.
- */
 
 require_once __DIR__ . '/auth.php';
 requireLogin();
@@ -12,14 +8,13 @@ $userName = $_SESSION['full_name'] ?? 'Student';
 $userEmail = $_SESSION['email'] ?? '';
 $userRole = $_SESSION['role'] ?? 'student';
 
-// Handle Event Registration
 $regMsg = "";
 $regType = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'register_event') {
     $eventId = (int)($_POST['event_id'] ?? 0);
     if ($eventId > 0) {
-        // Check if already registered
+        
         $chk = $conn->prepare("SELECT registration_id FROM registrations WHERE event_id = ? AND user_id = ?");
         $chk->bind_param("ii", $eventId, $userId);
         $chk->execute();
@@ -45,14 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Fetch user profile info
 $userQuery = $conn->prepare("SELECT * FROM users WHERE user_id = ?");
 $userQuery->bind_param("i", $userId);
 $userQuery->execute();
 $profile = $userQuery->get_result()->fetch_assoc();
 $userQuery->close();
 
-// Fetch events registered by this student
 $myEventsStmt = $conn->prepare("
     SELECT e.event_id, e.title, e.category, e.event_date, e.event_time, e.venue, r.registered_at
     FROM registrations r
@@ -65,7 +58,6 @@ $myEventsStmt->execute();
 $myEvents = $myEventsStmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $myEventsStmt->close();
 
-// Fetch upcoming events available for registration
 $availEventsStmt = $conn->prepare("
     SELECT * FROM events
     WHERE event_date >= CURDATE()
@@ -88,7 +80,7 @@ $availEventsStmt->close();
     <script src="script.js" defer></script>
 </head>
 <body class="page-student-dash">
-    <!-- Navbar -->
+    
     <header class="header">
         <div class="logo-section">
             <div class="brand-badge">SP</div>
@@ -108,7 +100,7 @@ $availEventsStmt->close();
     </header>
 
     <main class="admin-container">
-        <!-- Welcome Banner -->
+        
         <div class="dashboard-banner">
             <div>
                 <h2>Hello, <?= sanitize_out($userName) ?>! &#128075;</h2>
@@ -126,7 +118,7 @@ $availEventsStmt->close();
             </div>
         <?php endif; ?>
 
-        <!-- Quick Access Shortcuts Grid -->
+        
         <section class="quick-grid">
             <a href="Timetable.html" class="quick-card">
                 <div class="quick-icon">&#128197;</div>
@@ -153,9 +145,9 @@ $availEventsStmt->close();
             </a>
         </section>
 
-        <!-- Two Columns: My Registered Events vs Available Events -->
+        
         <div class="two-col-grid" style="margin-top: 30px;">
-            <!-- Registered Events -->
+            
             <div class="card">
                 <h3>My Registered Events (<?= count($myEvents) ?>)</h3>
                 <div class="table-responsive">
@@ -188,7 +180,7 @@ $availEventsStmt->close();
                 </div>
             </div>
 
-            <!-- Available Events to Register -->
+            
             <div class="card">
                 <h3>Upcoming Events Open for Registration</h3>
                 <?php if (empty($availEvents)): ?>

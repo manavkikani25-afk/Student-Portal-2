@@ -1,13 +1,8 @@
--- ==========================================================
--- Student Portal - Complete Database Schema & Seed Data
--- Subject: Web Development Frameworks (ITUE203)
--- Database: campussync_db
--- ==========================================================
+
 
 CREATE DATABASE IF NOT EXISTS `campussync_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `campussync_db`;
 
--- Drop tables in order of foreign key dependency
 DROP TABLE IF EXISTS `remember_tokens`;
 DROP TABLE IF EXISTS `audit_logs`;
 DROP TABLE IF EXISTS `registrations`;
@@ -16,7 +11,6 @@ DROP TABLE IF EXISTS `events`;
 DROP TABLE IF EXISTS `students`;
 DROP TABLE IF EXISTS `users`;
 
--- 1. USERS TABLE (Prac 9, 10, 14)
 CREATE TABLE `users` (
     `user_id` INT AUTO_INCREMENT PRIMARY KEY,
     `full_name` VARCHAR(100) NOT NULL,
@@ -29,7 +23,6 @@ CREATE TABLE `users` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 2. USER ROLES TABLE (Prac 10, 14 - RBAC)
 CREATE TABLE `user_roles` (
     `role_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NOT NULL UNIQUE,
@@ -38,7 +31,6 @@ CREATE TABLE `user_roles` (
     CONSTRAINT `fk_user_roles_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 3. REMEMBER ME TOKENS (Prac 10)
 CREATE TABLE `remember_tokens` (
     `token_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NOT NULL,
@@ -49,7 +41,6 @@ CREATE TABLE `remember_tokens` (
     CONSTRAINT `fk_remember_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 4. STUDENTS DIRECTORY TABLE (Prac 11 - Minimum 20 records required)
 CREATE TABLE `students` (
     `student_id` INT AUTO_INCREMENT PRIMARY KEY,
     `enrollment_no` VARCHAR(20) NOT NULL UNIQUE,
@@ -62,7 +53,6 @@ CREATE TABLE `students` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 5. EVENTS TABLE (Prac 12, 13)
 CREATE TABLE `events` (
     `event_id` INT AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(150) NOT NULL,
@@ -76,7 +66,6 @@ CREATE TABLE `events` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 6. EVENT REGISTRATIONS (Prac 14)
 CREATE TABLE `registrations` (
     `registration_id` INT AUTO_INCREMENT PRIMARY KEY,
     `event_id` INT NOT NULL,
@@ -86,7 +75,6 @@ CREATE TABLE `registrations` (
     CONSTRAINT `fk_reg_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 7. AUDIT LOGS (Prac 14)
 CREATE TABLE `audit_logs` (
     `log_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NULL,
@@ -97,26 +85,18 @@ CREATE TABLE `audit_logs` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ==========================================================
--- SEED DATA INSERTION
--- ==========================================================
-
--- Insert Default Admin User (Password: Admin@12345)
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `mobile`, `password`, `course`, `year`, `gender`) VALUES
 (1, 'System Administrator', 'admin@campus.edu', '9876543210', '$2y$10$XdH0iaeRGiYWFk6j5KiKcuel5yXRg5zgUufbgixRztU9r.1gPQW1y', 'B.Tech IT', 4, 'Male');
 
--- Insert Default Student User (Password: Student@123)
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `mobile`, `password`, `course`, `year`, `gender`) VALUES
 (2, 'Aryan Sharma', 'student@campus.edu', '9898012345', '$2y$10$dHPtEyqC1CjzhV.d75bWsuS9EYhITyZ9BZ7.Ma7YpmfCKqNkzAf0S', 'B.Tech CSE', 3, 'Male'),
 (3, 'Priya Patel', 'priya.patel@campus.edu', '9712345678', '$2y$10$dHPtEyqC1CjzhV.d75bWsuS9EYhITyZ9BZ7.Ma7YpmfCKqNkzAf0S', 'B.Tech CE', 2, 'Female');
 
--- Assign Roles
 INSERT INTO `user_roles` (`user_id`, `role`) VALUES
 (1, 'admin'),
 (2, 'student'),
 (3, 'student');
 
--- Seed Students Table (22 seeded records for Practical 11 requirement)
 INSERT INTO `students` (`enrollment_no`, `full_name`, `email`, `mobile`, `course`, `semester`, `status`) VALUES
 ('25DCS001', 'Aarav Mehta', 'aarav.mehta@campus.edu', '9825011223', 'B.Tech CSE', 3, 'Active'),
 ('25DCS002', 'Ananya Shah', 'ananya.shah@campus.edu', '9825022334', 'B.Tech CSE', 3, 'Active'),
@@ -141,7 +121,6 @@ INSERT INTO `students` (`enrollment_no`, `full_name`, `email`, `mobile`, `course
 ('25DIT021', 'Vedant Parekh', 'vedant.parekh@campus.edu', '9825211223', 'B.Tech IT', 3, 'Active'),
 ('25DCS022', 'Yashvi Kothari', 'yashvi.kothari@campus.edu', '9825222334', 'B.Tech CSE', 1, 'Active');
 
--- Seed Events Table (Prac 12, 13)
 INSERT INTO `events` (`title`, `category`, `event_date`, `event_time`, `venue`, `event_description`, `poster`, `status`) VALUES
 ('TechNova 2026 Hackathon', 'Technical', '2026-11-15', '09:00:00', 'Central Computing Lab, Block-B', 'A 24-hour national level hackathon focusing on AI, Web3, and IoT smart campus solutions with cash prizes up to Rs. 50,000.', NULL, 'Upcoming'),
 ('Spandan Annual Cultural Fest', 'Cultural', '2026-12-02', '17:30:00', 'University Open Air Auditorium', 'The flagship cultural carnival featuring singing, dance, drama, fashion pageant, and celebrity music night.', NULL, 'Upcoming'),
@@ -149,13 +128,11 @@ INSERT INTO `events` (`title`, `category`, `event_date`, `event_time`, `venue`, 
 ('Modern Full-Stack Web Development Workshop', 'Workshop', '2026-11-08', '10:30:00', 'Seminar Hall 3', 'Hands-on session covering PHP 8, REST APIs, responsive CSS3 architectures, and MySQL optimization.', NULL, 'Upcoming'),
 ('AI & Machine Learning Symposium', 'Seminar', '2026-11-28', '11:00:00', 'Auditorium A', 'Expert keynote addresses from industry leaders on Generative AI, Large Language Models, and deep tech trends.', NULL, 'Upcoming');
 
--- Seed Event Registrations
 INSERT INTO `registrations` (`event_id`, `user_id`) VALUES
 (1, 2),
 (2, 2),
 (4, 3);
 
--- Seed Initial Audit Logs (Prac 14)
 INSERT INTO `audit_logs` (`user_id`, `user_name`, `action`, `details`, `ip_address`) VALUES
 (1, 'System Administrator', 'DATABASE_INIT', 'Database schema initialized and seed records inserted successfully.', '127.0.0.1'),
 (1, 'System Administrator', 'ADMIN_LOGIN', 'Admin authenticated into system.', '127.0.0.1'),

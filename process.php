@@ -1,8 +1,4 @@
 <?php
-/**
- * Student Portal - Form Processor with File Storage 
- * Validates inquiries/feedback, sanitizes input, and saves records into CSV and JSON.
- */
 
 require_once __DIR__ . '/db.php';
 
@@ -41,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Sanitize values
+    
     $cleanName = filter_var($senderName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $cleanEmail = filter_var($senderEmail, FILTER_SANITIZE_EMAIL);
     $cleanSubject = filter_var($subject, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -49,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cleanMsg = filter_var($message, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $timestamp = date("Y-m-d H:i:s");
 
-    // 1. Store in CSV format 
+    
     $csvRow = [$timestamp, $cleanName, $cleanEmail, $cleanCategory, $cleanSubject, $cleanMsg];
     $csvHandle = fopen($csvFile, 'a');
     if ($csvHandle) {
-        // If file is newly created, write header row
+        
         if (filesize($csvFile) === 0) {
             fputcsv($csvHandle, ['Timestamp', 'Full Name', 'Email', 'Category', 'Subject', 'Message']);
         }
@@ -61,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         fclose($csvHandle);
     }
 
-    // 2. Store in JSON format 
+    
     $existingData = [];
     if (file_exists($jsonFile)) {
         $jsonRaw = file_get_contents($jsonFile);
@@ -83,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     file_put_contents($jsonFile, json_encode($existingData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    // Audit log if logged in
+    
     if (isset($_SESSION['user_id'])) {
         logAudit($conn, $_SESSION['user_id'], $_SESSION['full_name'], 'HELP_INQUIRY', "Submitted contact request: $cleanSubject");
     }
